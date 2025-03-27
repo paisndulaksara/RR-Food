@@ -1,25 +1,39 @@
 'use client';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
 import { FiSearch, FiHeart, FiShoppingCart, FiMenu, FiX } from 'react-icons/fi';
 
 const Header = () => {
+  const pathname = usePathname();
+  const isHome = pathname === '/';
+
   const [menuOpen, setMenuOpen] = useState(false);
 
+  // Set text color: white for home, black otherwise
+  const textColor = isHome ? 'text-white' : 'text-black';
+  // Set header background: transparent on home, white on others
+  const headerBg = isHome ? 'bg-transparent' : 'bg-white';
+  // Set header positioning: absolute on home, sticky on others
+  const headerPosition = isHome ? 'absolute' : 'sticky top-0';
+
   return (
-    // Make the header absolutely positioned at the top
-    <header className="absolute top-0 left-0 w-full z-50 pt-6">
+    <header className={`${headerPosition} left-0 w-full z-50 pt-6 ${headerBg}`}>
       <div className="container flex justify-between items-start relative">
         {/* Mobile Menu Icon */}
-        <div className="lg:hidden absolute right-4 top-4 z-20 text-white">
+        <div className="lg:hidden absolute right-4 top-4 z-20">
           <button onClick={() => setMenuOpen(!menuOpen)}>
-            {menuOpen ? <FiX size={24} /> : <FiMenu size={24} />}
+            {menuOpen ? (
+              <FiX size={24} className={textColor} />
+            ) : (
+              <FiMenu size={24} className={textColor} />
+            )}
           </button>
         </div>
 
         {/* Desktop Left Nav */}
-        <nav className="hidden lg:flex gap-4 text-sm text-white font-normal uppercase pt-2">
+        <nav className={`hidden lg:flex gap-4 text-sm font-normal uppercase pt-2 ${textColor}`}>
           <Link href="/">HOME</Link>
           <span>|</span>
           <Link href="/products">PRODUCTS</Link>
@@ -32,7 +46,7 @@ const Header = () => {
         </nav>
 
         {/* Desktop Icons */}
-        <div className="hidden lg:flex gap-6 items-center text-white text-base pt-2">
+        <div className={`hidden lg:flex gap-6 items-center text-base pt-2 ${textColor}`}>
           <Link href="/login">LOGIN</Link>
           <FiSearch className="cursor-pointer text-lg" />
           <FiHeart className="cursor-pointer text-lg" />
@@ -48,19 +62,35 @@ const Header = () => {
             height={100}
             className="mx-auto"
           />
-          <span className="text-white text-xs mt-1">SINCE 2007</span>
+          <span className="text-xs mt-1">SINCE 2007</span>
         </div>
       </div>
 
       {/* Mobile Dropdown Nav */}
       {menuOpen && (
-        <div className="lg:hidden absolute top-[120px] left-0 right-0 bg-black py-4 z-40 flex flex-col items-center gap-4 text-white uppercase text-sm border-t border-[#c9a566]/60">
-          <Link href="/">HOME</Link>
-          <Link href="/products">PRODUCTS</Link>
-          <Link href="/vending-machine">VENDING MACHINE</Link>
-          <Link href="/about">ABOUT US</Link>
-          <Link href="/contact">CONTACT</Link>
-          <Link href="/login">LOGIN</Link>
+        <div
+          className={`lg:hidden absolute top-[120px] left-0 right-0 py-4 z-40 flex flex-col items-center gap-4 uppercase text-sm border-t border-[#c9a566]/60 ${
+            isHome ? 'bg-black' : 'bg-white'
+          }`}
+        >
+          <Link href="/" className={isHome ? textColor : textColor}>
+            HOME
+          </Link>
+          <Link href="/products" className={isHome ? textColor : textColor}>
+            PRODUCTS
+          </Link>
+          <Link href="/vending-machine" className={isHome ? textColor : textColor}>
+            VENDING MACHINE
+          </Link>
+          <Link href="/about" className={isHome ? textColor : textColor}>
+            ABOUT US
+          </Link>
+          <Link href="/contactus" className={isHome ? textColor : textColor}>
+            CONTACT
+          </Link>
+          <Link href="/login" className={isHome ? textColor : textColor}>
+            LOGIN
+          </Link>
         </div>
       )}
 

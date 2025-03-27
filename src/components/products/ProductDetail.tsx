@@ -1,57 +1,38 @@
-'use client';
-
+ 'use client';
 import { useState } from 'react';
 import Image from 'next/image';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Thumbs } from 'swiper/modules';
-
-// If not imported globally, you'd do:
-// import 'swiper/css';
-// import 'swiper/css/navigation';
-// import 'swiper/css/pagination';
-// import 'swiper/css/thumbs';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+import 'swiper/css/thumbs';
 
 interface ProductDetailProps {
   productSlug: string;
 }
 
 export default function ProductDetail({ productSlug }: ProductDetailProps) {
-  // Convert slug to a display name
   const productName = productSlug.replace(/-/g, ' ');
-
-  // Product images array (the 3rd image is default in the main slider).
-  // We'll just reuse the same image for indices 0-2 for demo. 
-  // The 4th image (index 3) is for the description section below.
   const productImages = [
+    '/images/RR-food-singlep5+.jpg', // Main image variant
     '/images/RR-food-singlep5+.jpg',
-    '/images/RR-food-singlep5+.jpg',
-    '/images/RR-food-singlep5+.jpg',
-    '/images/RR-food-singflep.jpg', // used in the description section
+    '/images/RR-food-singlep5+.jpg', // Default main: third image (index 2)
+    '/images/RR-food-singflep.jpg',  // Description section image
   ];
 
-  // We'll link the main Swiper to the thumbs
   const [thumbsSwiper, setThumbsSwiper] = useState<any>(null);
-
-  // Example product info
   const productPrice = 65.0;
   const productOldPrice = 75.0;
   const shortDescription =
     'Coffee Beans: Our Ethiopian Yirgacheffe Espresso showcases distinct characteristics from one of Ethiopia’s renowned coffee regions—rich, aromatic, and exceptionally smooth.';
 
-  // For quantity
   const [quantity, setQuantity] = useState(1);
-  const incrementQty = () => setQuantity((q) => q + 1);
-  const decrementQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
+  const incrementQty = () => setQuantity(q => q + 1);
+  const decrementQty = () => setQuantity(q => (q > 1 ? q - 1 : 1));
+  const handleAddToCart = () => console.log(`Added ${quantity} of ${productName} to cart`);
+  const handleBuyNow = () => console.log(`Buying ${quantity} of ${productName} immediately`);
 
-  const handleAddToCart = () => {
-    console.log(`Added ${quantity} of ${productName} to cart`);
-  };
-
-  const handleBuyNow = () => {
-    console.log(`Buying ${quantity} of ${productName} immediately`);
-  };
-
-  // "You might also like" items
   const relatedProducts = [
     { name: 'RR Cafe', image: '/images/prod.png' },
     { name: 'RR Tea', image: '/images/prod.png' },
@@ -66,16 +47,15 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
         Home &gt; <span className="text-gray-700 font-medium">{productName}</span>
       </div>
 
-      {/* 2-Column Layout */}
+      {/* Main 2-Column Layout */}
       <section className="container mx-auto px-4 pb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* LEFT COLUMN: Main + Thumbs */}
+        {/* LEFT: Swiper Slider with Thumbnails */}
         <div>
-          {/* Main Swiper (linked to thumbs) */}
           <Swiper
             modules={[Navigation, Pagination, Thumbs]}
             navigation
             pagination={{ clickable: true }}
-            initialSlide={2} // Show the 3rd image by default
+            initialSlide={2}
             thumbs={{ swiper: thumbsSwiper }}
             className="mb-4"
             style={{ width: '100%', height: 'auto' }}
@@ -94,8 +74,6 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
               </SwiperSlide>
             ))}
           </Swiper>
-
-          {/* Thumbnails Swiper (for the first 3 images) */}
           <Swiper
             modules={[Thumbs]}
             watchSlidesProgress
@@ -120,14 +98,12 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
           </Swiper>
         </div>
 
-        {/* RIGHT COLUMN: Buy Section */}
+        {/* RIGHT: Product Buy Section */}
         <div className="space-y-4">
           <h1 className="text-2xl md:text-3xl font-bold">{productName}</h1>
-          {/* Ratings */}
           <div className="flex items-center text-sm text-gray-500">
             ★★★★☆ &nbsp; (No reviews)
           </div>
-          {/* Price */}
           <div className="text-2xl font-semibold">
             ${productPrice.toFixed(2)}
             {productOldPrice && (
@@ -136,11 +112,8 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
               </span>
             )}
           </div>
-          {/* Short Description */}
           <p className="text-sm text-gray-600">{shortDescription}</p>
           <hr />
-
-          {/* Quantity */}
           <div className="flex items-center gap-4">
             <div className="flex items-center border rounded">
               <button onClick={decrementQty} className="px-2 py-1 text-xl font-bold">-</button>
@@ -154,8 +127,7 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
               ADD TO CART
             </button>
           </div>
-
-          {/* Move BUY IT NOW to new line */}
+          {/* Move BUY IT NOW to a new line */}
           <div>
             <button
               onClick={handleBuyNow}
@@ -164,11 +136,9 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
               BUY IT NOW
             </button>
           </div>
-
-          {/* Delivery info */}
           <div className="p-4 bg-gray-50 rounded text-sm text-gray-600">
             <p>Estimated delivery: 12-26 days (Intl), 3-6 days (US)</p>
-            <p>Return within 45 days. Duties &amp; taxes non-refundable.</p>
+            <p>Return within 45 days. Duties & taxes non-refundable.</p>
           </div>
         </div>
       </section>
@@ -177,31 +147,29 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
       <section className="container mx-auto px-4 py-8">
         <h2 className="text-xl md:text-2xl font-bold mb-4">Description</h2>
         <p className="text-gray-600 mb-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis orci non massa dignissim tempus. 
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis orci non massa dignissim tempus.
           Fusce sed risus quis justo faucibus ullamcorper. Cras interdum dictum viverra.
         </p>
         <p className="text-gray-600 mb-6">
-          Sed imperdiet, nisl eget sollicitudin molestie, purus orci elementum neque, 
-          vitae tincidunt purus odio vitae libero. Morbi et interdum purus. Quisque consequat 
+          Sed imperdiet, nisl eget sollicitudin molestie, purus orci elementum neque,
+          vitae tincidunt purus odio vitae libero. Morbi et interdum purus. Quisque consequat
           nunc mi, sed efficitur risus dapibus a.
         </p>
-
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
           <div>
             <h3 className="text-lg font-semibold mb-2">Our Coffee Journey</h3>
             <p className="text-gray-600 mb-4">
-              Amet consectetur adipisicing elit. Dolorum, accusantium, suscipit, vitae 
-              recusandae odit consectetur eaque sequi delectus nostrum nam nisi ab 
+              Amet consectetur adipisicing elit. Dolorum, accusantium, suscipit, vitae
+              recusandae odit consectetur eaque sequi delectus nostrum nam nisi ab
               impedit ad facilis. Dolores facilis odio accusantium earum!
             </p>
             <p className="text-gray-600">
-              Quas rerum nisi fuga odio culpa amet, nesciunt doloremque inventore ducimus, 
-              consequatur officia nam, maxime provident a. Fugit deleniti aperiam tempore 
-              molestiae voluptatibus. Maecenas laoreet condimentum orci vel ultricies. 
+              Quas rerum nisi fuga odio culpa amet, nesciunt doloremque inventore ducimus,
+              consequatur officia nam, maxime provident a. Fugit deleniti aperiam tempore
+              molestiae voluptatibus. Maecenas laoreet condimentum orci vel ultricies.
               Nullam quis neque lacinia, venenatis mi ac, vehicula orci.
             </p>
           </div>
-          {/* 4th image (index 3) */}
           <div className="border rounded">
             <Image
               src={productImages[3]}
