@@ -1,26 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&display=swap');
 @import "tailwindcss";
 
+@import 'swiper/css';
+@import 'swiper/css/navigation';
+@import 'swiper/css/pagination';
+
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-main: 'Noto Sans', sans-serif;
+  --color-main: #000000;
+  --color-secondary: #ffffff;
+  --color-third: #e12c43;
+
+  /* Font Sizes */
+  --fs-h1: 48px;
+  --fs-h2: 32px;
+  --fs-h3: 24px;
+  --fs-p: 18px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+body{
+  background-color: #000000
+}
+/* Container utility */
+.container {
+  @apply max-w-[1200px] mx-auto px-4;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Typography classes */
+.h1 {
+  font-size: var(--fs-h1);
+  font-weight: 700;
+  font-family: var(--font-main);
+  color: var(--color-main);
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.h2 {
+  font-size: var(--fs-h2);
+  font-weight: 400;
+  font-family: var(--font-main);
+  color: var(--color-main);
+}
+
+.h3 {
+  font-size: var(--fs-h3);
+  font-weight: 400;
+  font-family: var(--font-main);
+  color: var(--color-main);
+}
+
+.p {
+  font-size: var(--fs-p);
+  font-weight: 400;
+  font-family: var(--font-main);
+  color: var(--color-main);
+}
+
+.white {
+  color: var(--color-secondary);
+}
+
+.third {
+  color: var(--color-third);
+}
+
+.bg-main {
+  background-color: var(--color-main);
+}
+
+.bg-secondary {
+  background-color: var(--color-secondary);
+}
+
+.bg-third {
+  background-color: var(--color-third);
 }
