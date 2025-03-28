@@ -5,7 +5,7 @@ const FoodBanner = () => {
   return (
     <section className="relative w-full h-[400px]">
       <Image
-        src="/images/banner.png"
+        src="/images/Banner.jpg"
         alt="Premium Premixes Banner"
         fill
         priority

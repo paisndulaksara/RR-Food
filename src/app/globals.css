@@ -19,9 +19,7 @@
   --fs-p: 18px;
 }
 
-body{
-  background-color: #000000
-}
+ 
 /* Container utility */
 .container {
   @apply max-w-[1200px] mx-auto px-4;

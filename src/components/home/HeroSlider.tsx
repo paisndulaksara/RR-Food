@@ -8,21 +8,21 @@ import 'swiper/css/pagination';
 const slides = [
   {
     id: 1,
-    image: '/images/slider.jpg',
-    title: 'Brewed to Perfection',
-    subtitle: 'Premium Premixers',
-    description: 'The Heart and Soul of RR Brews',
+    image: '/images/02.jpg',
+    title: 'Brewed Fresh,<br/>Served Fast',
+    subtitle: ' RR CAFE',
+    description: 'Coffee on-demand, whenever you need it.Perfectly brewed, every time.',
   },
   {
     id: 2,
-    image: '/images/slider.jpg',
-    title: 'Taste the Freshness',
-    subtitle: 'Signature Beverages',
-    description: 'Crafted for Excellence',
+    image: '/images/03.jpg',
+    title: 'Pressed for Freshness,<br/> Served in Seconds',
+    subtitle: 'RR Cafe',
+    description: 'Fresh juice at the touch of a button. Feel the goodness in every sip!',
   },
   {
     id: 3,
-    image: '/images/slider.jpg',
+    image: '/images/01.jpg',
     title: 'From Beans to Bliss',
     subtitle: 'Authentic Flavor',
     description: 'Indulge in the Richness of RR',
@@ -57,11 +57,12 @@ const HeroSlider = () => {
                   <h4 className="text-white text-[24px] font-bold leading-tight">
                     {slide.subtitle}
                   </h4>
-                  <h1 className="text-white text-[80px] font-bold mb-2 leading-[1.1]">
-                    {slide.title}
+                  <h1 className="text-white text-[70px] font-bold mb-2 leading-[1.1]">
+                    
+                    <div dangerouslySetInnerHTML={{ __html: slide.title }} />
                   </h1>
                   <p className="text-white text-[24px] font-normal">
-                    {slide.description}
+                    <div dangerouslySetInnerHTML={{ __html: slide.description }} />
                   </p>
                 </div>
               </div>

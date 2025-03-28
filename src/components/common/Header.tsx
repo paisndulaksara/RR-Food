@@ -1,4 +1,4 @@
-'use client';
+ 'use client';
 import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -11,12 +11,12 @@ const Header = () => {
 
   const [menuOpen, setMenuOpen] = useState(false);
 
-  // Set text color: white for home, black otherwise
+  // Text color: white for home, black otherwise
   const textColor = isHome ? 'text-white' : 'text-black';
-  // Set header background: transparent on home, white on others
+  // Background: transparent on home, white otherwise
   const headerBg = isHome ? 'bg-transparent' : 'bg-white';
-  // Set header positioning: absolute on home, sticky on others
-  const headerPosition = isHome ? 'absolute' : 'sticky top-0';
+  // Use fixed header so it overlays the content (and doesn't push your slider down)
+  const headerPosition = 'fixed top-0';
 
   return (
     <header className={`${headerPosition} left-0 w-full z-50 pt-6 ${headerBg}`}>
@@ -37,8 +37,7 @@ const Header = () => {
           <Link href="/">HOME</Link>
           <span>|</span>
           <Link href="/products">PRODUCTS</Link>
-          <span>|</span>
-          <Link href="/vending-machine">VENDING MACHINE</Link>
+          
           <span>|</span>
           <Link href="/about">ABOUT US</Link>
           <span>|</span>
@@ -62,7 +61,7 @@ const Header = () => {
             height={100}
             className="mx-auto"
           />
-          <span className="text-xs mt-1">SINCE 2007</span>
+          <span className="text-xs mt-1 text-white">SINCE 2007</span>
         </div>
       </div>
 
@@ -73,28 +72,26 @@ const Header = () => {
             isHome ? 'bg-black' : 'bg-white'
           }`}
         >
-          <Link href="/" className={isHome ? textColor : textColor}>
+          <Link href="/" className={textColor}>
             HOME
           </Link>
-          <Link href="/products" className={isHome ? textColor : textColor}>
+          <Link href="/products" className={textColor}>
             PRODUCTS
           </Link>
-          <Link href="/vending-machine" className={isHome ? textColor : textColor}>
-            VENDING MACHINE
-          </Link>
-          <Link href="/about" className={isHome ? textColor : textColor}>
+         
+          <Link href="/about" className={textColor}>
             ABOUT US
           </Link>
-          <Link href="/contactus" className={isHome ? textColor : textColor}>
+          <Link href="/contactus" className={textColor}>
             CONTACT
           </Link>
-          <Link href="/login" className={isHome ? textColor : textColor}>
+          <Link href="/login" className={textColor}>
             LOGIN
           </Link>
         </div>
       )}
 
-      {/* Bottom Border with fade (optional) */}
+      {/* Bottom Border with fade */}
       <div className="absolute top-[80px] left-0 right-0 h-[1px] bg-[#c9a566]/60 z-0">
         <div className="absolute left-0 top-0 h-full w-[80px] bg-gradient-to-r from-black to-transparent" />
         <div className="absolute right-0 top-0 h-full w-[80px] bg-gradient-to-l from-black to-transparent" />

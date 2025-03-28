@@ -1,6 +1,8 @@
+// src/app/layout.tsx
 import "./globals.css";
 import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
+import Footer from "@/components/common/Footer"; 
+import ContentWrapper from "@/components/common/ContentWrapper";
 
 export const metadata = {
   title: "RR Foods",
@@ -14,10 +16,12 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <Header />
-      <body className="">
-        
-        <main>{children}</main>
+      <body>
+        <Header />
+        {/* Use the client component for conditional padding */}
+        <ContentWrapper>
+          {children}
+        </ContentWrapper>
         <Footer />
       </body>
     </html>

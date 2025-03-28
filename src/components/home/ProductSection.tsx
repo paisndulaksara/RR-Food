@@ -2,16 +2,16 @@
 import Image from 'next/image';
 
 const products = [
-  { name: 'Milk Coffee', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Milk Tea', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Cardamom Tea', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Ginger Tea', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Hot Chocolate', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Ginger Milk Tea', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Masala Tea', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Strawberry Tea', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Lemongrass Tea', image: '/images/prod.png', background: '/images/product-back.jpg' },
-  { name: 'Cinnamon Tea', image: '/images/prod.png', background: '/images/product-back.jpg' },
+  { name: 'Milk Coffee', image: '/images/prod.png', background: '/images/product-back-01.jpg' },
+  { name: 'Milk Tea', image: '/images/prod02.png', background: '/images/product-back-02.jpg' },
+  { name: 'Cardamom Tea', image: '/images/prod03.png', background: '/images/product-back-03.jpg' },
+  { name: 'Ginger Tea', image: '/images/prod04.png', background: '/images/product-back-04.jpg' },
+  { name: 'Hot Chocolate', image: '/images/prod05.png', background: '/images/product-back-05.jpg' },
+  { name: 'Ginger Milk Tea', image: '/images/prod06.png', background: '/images/product-back-06.jpg' },
+  { name: 'Masala Tea', image: '/images/prod07.png', background: '/images/product-back-07.jpg' },
+  { name: 'Strawberry Tea', image: '/images/prod08.png', background: '/images/product-back-08.jpg' },
+  { name: 'Lemongrass Tea', image: '/images/prod09.png', background: '/images/product-back-09.jpg' },
+  { name: 'Cinnamon Tea', image: '/images/prod10.png', background: '/images/product-back-10.jpg' },
 ];
 
 const ProductSection = () => {

@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 export default function ContactBanner() {
   return (
-    <section className="relative w-full h-[300px] overflow-hidden">
+    <section className="relative w-full h-[450px] overflow-hidden">
       <Image
         src="/images/aboutBanner.jpg"
         alt="Contact Banner"

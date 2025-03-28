@@ -96,7 +96,8 @@ const VendingMachine = () => {
         {/* Machines Grid */}
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
           {machinesToShow.map((machine, index) => (
-            <div key={index} className="text-center">
+            <div key={index} className="text-center bg-gray-50 p-4 rounded ">
+              
               <Image
                 src={machine.image}
                 alt={machine.name}
@@ -104,6 +105,7 @@ const VendingMachine = () => {
                 height={200}
                 className="mx-auto"
               />
+              
               <h4 className="text-black font-semibold mt-2">{machine.name}</h4>
               <button className="text-[#e12c43] underline mt-1">REQUEST</button>
             </div>
