@@ -36,7 +36,7 @@ const ProductSection = () => {
               </div>
 
               {/* Product packaging (bottom-right) */}
-              <div className="absolute bottom-2 ">
+              <div className="absolute  bottom-2 right-2 ">
                 <Image
                   src={product.image}
                   alt={product.name}
