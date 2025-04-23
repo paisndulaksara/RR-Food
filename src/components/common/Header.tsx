@@ -25,7 +25,7 @@ const Header = () => {
 
   return (
     <header className={`fixed top-0 left-0 w-full z-50 transition-colors duration-300`}>
-    <div className={`relative pt-6 pb-2 ${backgroundClass}`}>
+    <div className={`relative pt-6 pb-7 ${backgroundClass}`}>
   
       <div className="container flex justify-between items-start relative">
         {/* Mobile Menu Icon */}
