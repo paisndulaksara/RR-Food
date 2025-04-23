@@ -1,16 +1,16 @@
-// app/products/[slug]/page.tsx
+// src/app/products/[slug]/page.tsx
 import ProductDetail from '@/components/products/ProductDetail';
 import { getAllProducts } from '@/lib/products';
-export type ParamsType = Promise<{ slug: string }>;
 
 interface PageProps {
-  params: ParamsType;
+  params: {
+    slug: string;
+  };
 }
 
-export default async function ProductDetailPage({ params }: PageProps) {
-  const { slug } = await params;
-  return <ProductDetail productSlug={slug} />;
-}  
+export default function ProductDetailPage({ params }: PageProps) {
+  return <ProductDetail productSlug={params.slug} />;
+}
 
 export async function generateStaticParams() {
   const products = getAllProducts();
