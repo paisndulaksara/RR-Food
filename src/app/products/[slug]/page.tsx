@@ -1,4 +1,3 @@
-// src/app/products/[slug]/page.tsx
 import { getAllProducts, getProductBySlug } from '@/lib/products';
 import ProductDetail from '@/components/products/ProductDetail';
 
@@ -7,15 +6,8 @@ export async function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
 }
 
-interface PageProps {
-  params: {
-    slug: string;
-  };
-}
-
-// ✅ Make the default export async
-export default async function ProductPage({ params }: PageProps) {
-  const product = getProductBySlug(params.slug);
+export default function ProductPage({ params }: { params: { slug: string } }) {
+  const product = getProductBySlug(params.slug); // ✅ No `await` here
 
   if (!product) {
     return (
