@@ -1,12 +1,20 @@
+// src/app/products/[slug]/page.tsx
 import { getAllProducts, getProductBySlug } from '@/lib/products';
-import ProductDetail from '@/components/products/ProductDetail'; 
+import ProductDetail from '@/components/products/ProductDetail';
 
 export async function generateStaticParams() {
   const products = getAllProducts();
   return products.map((product) => ({ slug: product.slug }));
 }
 
-export default function ProductPage({ params }: { params: { slug: string } }) {
+interface PageProps {
+  params: {
+    slug: string;
+  };
+}
+
+// ✅ Make the default export async
+export default async function ProductPage({ params }: PageProps) {
   const product = getProductBySlug(params.slug);
 
   if (!product) {
