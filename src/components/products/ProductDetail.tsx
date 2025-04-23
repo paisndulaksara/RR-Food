@@ -4,28 +4,13 @@ import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
-import { getProductBySlug, Product } from "@/lib/products";
+import {  Product } from "@/lib/products";
 
 interface ProductDetailProps {
-  productSlug: string;
+  product: Product;
 }
 
-export default function ProductDetail({ productSlug }: ProductDetailProps) {
-  // Fetch product data
-  const product: Product | undefined = getProductBySlug(productSlug);
-
-  // If no product found, show a Coming Soon stub
-  if (!product) {
-    return (
-      <main className="p-8 text-center">
-        <h1 className="text-3xl font-bold mb-4">Coming Soon</h1>
-        <p className="text-lg">
-          Details for “{productSlug.replace(/-/g, ' ')}” will be available shortly.
-        </p>
-      </main>
-    );
-  }
-
+export default function ProductDetail({ product }: ProductDetailProps) {
   const {
     name: productName,
     price: productPrice,
@@ -39,10 +24,7 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
     descImage,
   } = product;
 
-  // Swiper thumbs state
-  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
-
-  // Quantity controls
+  const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null); // ✅ now safe
   const [quantity, setQuantity] = useState(1);
   const incrementQty = () => setQuantity((q) => q + 1);
   const decrementQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
