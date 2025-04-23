@@ -10,4 +10,4 @@ interface PageProps {
 export default async function ProductDetailPage({ params }: PageProps) {
   const { slug } = await params;
   return <ProductDetail productSlug={slug} />;
-}
+}  

@@ -1,81 +1,87 @@
 'use client';
-import { useState } from 'react';
-import Image from 'next/image';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Thumbs } from 'swiper/modules';
-// Import the Swiper type
-import { Swiper as SwiperClass } from 'swiper';
+import { useState } from "react";
+import Image from "next/image";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination, Thumbs } from "swiper/modules";
+import { Swiper as SwiperClass } from "swiper";
+import { getProductBySlug, Product } from "@/lib/products";
 
 interface ProductDetailProps {
   productSlug: string;
 }
 
 export default function ProductDetail({ productSlug }: ProductDetailProps) {
-  // Convert slug to a display name
-  const productName = productSlug.replace(/-/g, ' ');
+  // Fetch product data
+  const product: Product | undefined = getProductBySlug(productSlug);
 
-  // Product images array:
-  const productImages = [
-    '/images/RR-food-singlep5+.jpg',
-    '/images/RR-food-singlep5+.jpg',
-    '/images/RR-food-singlep5+.jpg',
-    '/images/RR-food-singflep.jpg',
-  ];
+  // If no product found, show a Coming Soon stub
+  if (!product) {
+    return (
+      <main className="p-8 text-center">
+        <h1 className="text-3xl font-bold mb-4">Coming Soon</h1>
+        <p className="text-lg">
+          Details for “{productSlug.replace(/-/g, ' ')}” will be available shortly.
+        </p>
+      </main>
+    );
+  }
 
-  // Use a typed state for the thumbs swiper instance.
+  const {
+    name: productName,
+    price: productPrice,
+    oldPrice: productOldPrice,
+    ingredients,
+    cups,
+    weight,
+    nutrition,
+    images: productImages,
+    description,
+    descImage,
+  } = product;
+
+  // Swiper thumbs state
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
 
-  // Example product info
-  const productPrice = 65.0;
-  const productOldPrice = 75.0;
-  const shortDescription =
-    'Coffee Beans: Our Ethiopian Yirgacheffe Espresso showcases distinct characteristics from one of Ethiopia’s renowned coffee regions—rich, aromatic, and exceptionally smooth.';
-
-  // For quantity
+  // Quantity controls
   const [quantity, setQuantity] = useState(1);
   const incrementQty = () => setQuantity((q) => q + 1);
   const decrementQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
-
-  const handleAddToCart = () => {
+  const handleAddToCart = () =>
     console.log(`Added ${quantity} of ${productName} to cart`);
-  };
-
-  const handleBuyNow = () => {
+  const handleBuyNow = () =>
     console.log(`Buying ${quantity} of ${productName} immediately`);
-  };
 
-  // "You might also like" items
+  // Static related products
   const relatedProducts = [
-    { name: 'RR Cafe', image: '/images/prod.png' },
-    { name: 'RR Tea', image: '/images/prod.png' },
-    { name: 'Ginger Milk Tea', image: '/images/prod.png' },
-    { name: 'Hot Chocolate', image: '/images/prod.png' },
+    { name: "RR Cafe", image: "/images/prod.png" },
+    { name: "RR Tea", image: "/images/prod.png" },
+    { name: "Ginger Milk Tea", image: "/images/prod.png" },
+    { name: "Hot Chocolate", image: "/images/prod.png" },
   ];
 
   return (
     <main className="bg-white">
       {/* Breadcrumb */}
       <div className="container mx-auto px-4 py-4 text-sm text-gray-500">
-        Home &gt; <span className="text-gray-700 font-medium">{productName}</span>
+        Home &gt;{" "}
+        <span className="text-gray-700 font-medium">{productName}</span>
       </div>
 
       {/* Main 2-Column Layout */}
       <section className="container mx-auto px-4 pb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
         {/* LEFT: Swiper Slider with Thumbnails */}
         <div>
-          {/* Main Swiper (linked to thumbs) */}
           <Swiper
             modules={[Navigation, Pagination, Thumbs]}
             navigation
             pagination={{ clickable: true }}
-            initialSlide={2} // Show the 3rd image by default
             thumbs={{ swiper: thumbsSwiper }}
             className="mb-4"
-            style={{ width: '100%', height: 'auto' }}
+            style={{ width: "100%", height: "auto" }}
           >
-            {productImages.slice(0, 3).map((img, idx) => (
+            {productImages.map((img, idx) => (
               <SwiperSlide key={idx}>
-                <div className="border rounded">
+                <div className="rounded">
                   <Image
                     src={img}
                     alt={`${productName} - slide ${idx}`}
@@ -88,7 +94,6 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
             ))}
           </Swiper>
 
-          {/* Thumbnails Swiper */}
           <Swiper
             modules={[Thumbs]}
             watchSlidesProgress
@@ -97,9 +102,9 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
             spaceBetween={10}
             className="mb-4"
           >
-            {productImages.slice(0, 3).map((img, idx) => (
+            {productImages.map((img, idx) => (
               <SwiperSlide key={idx}>
-                <div className="border rounded">
+                <div className="rounded">
                   <Image
                     src={img}
                     alt={`Thumbnail ${idx}`}
@@ -114,50 +119,92 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
         </div>
 
         {/* RIGHT: Buy Section */}
-        <div className="space-y-4">
-          <h1 className="text-2xl md:text-3xl font-bold">{productName}</h1>
-          {/* Ratings (placeholder) */}
-          <div className="flex items-center text-sm text-gray-500">
-            ★★★★☆ &nbsp; (No reviews)
+        <div className="space-y-6 px-4">
+          {/* 1. Product Title & Rating */}
+          <h1 className="text-4xl font-extrabold text-gray-900">
+            {productName}
+          </h1>
+          <div className="flex items-center gap-2">
+            <div className="flex text-[#c9a566]">
+              {"★★★★★".split("").map((star, i) => (
+                <span key={i} className="text-2xl tracking-wide">
+                  {star}
+                </span>
+              ))}
+            </div>
+            <span className="text-sm text-gray-500">(0 reviews)</span>
           </div>
-          {/* Price */}
-          <div className="text-2xl font-semibold">
-            ${productPrice.toFixed(2)}
+
+          {/* 2. Price with SALE badge */}
+          <div className="flex items-baseline gap-4">
+            <span className="text-3xl font-bold text-[#c9a566]">
+              ${productPrice.toFixed(2)}
+            </span>
             {productOldPrice && (
-              <span className="ml-3 text-gray-500 line-through text-base">
+              <span className="text-lg line-through text-gray-400">
                 ${productOldPrice.toFixed(2)}
               </span>
             )}
+            {productOldPrice && (
+              <span className="text-xs font-semibold uppercase bg-red-500 text-white px-2 py-1 rounded-full animate-pulse">
+                Sale
+              </span>
+            )}
           </div>
-          {/* Short Description */}
-          <p className="text-sm text-gray-600">{shortDescription}</p>
-          <hr />
-          {/* Quantity + Buttons */}
+
+          {/* 3. Short Description Box */}
+          <div className="text-sm text-gray-600 space-y-2">
+            <p>
+              <strong>Ingredients:</strong> {ingredients.join(", ")}.
+            </p>
+            <p>
+              <strong>Serves:</strong> up to {cups} cups.
+            </p>
+            <p>
+              <strong>Net Weight:</strong> {weight}
+            </p>
+          </div>
+
+          {/* 4. Quantity + Add to Cart */}
           <div className="flex items-center gap-4">
-            <div className="flex items-center border rounded">
-              <button onClick={decrementQty} className="px-2 py-1 text-xl font-bold">-</button>
-              <span className="px-3">{quantity}</span>
-              <button onClick={incrementQty} className="px-2 py-1 text-xl font-bold">+</button>
+            <div className="flex items-center border border-gray-300 rounded-lg overflow-hidden animate-pulse hover:animate-none">
+              <button onClick={decrementQty} className="px-4 py-2 text-xl">
+                −
+              </button>
+              <span className="px-6">{quantity}</span>
+              <button onClick={incrementQty} className="px-4 py-2 text-xl">
+                +
+              </button>
             </div>
             <button
               onClick={handleAddToCart}
-              className="bg-white border border-black text-black px-6 py-2 rounded hover:bg-black hover:text-white transition"
+              className="bg-[#c9a566] text-white px-8 py-3 rounded-lg shadow-lg hover:shadow-xl transition transform hover:scale-105"
             >
               ADD TO CART
             </button>
           </div>
-          {/* BUY IT NOW on a new line */}
-          <div>
-            <button
-              onClick={handleBuyNow}
-              className="bg-black text-white px-6 py-2 rounded hover:bg-gray-800 transition"
-            >
-              BUY IT NOW
-            </button>
-          </div>
-          {/* Delivery info */}
-          <div className="p-4 bg-gray-50 rounded text-sm text-gray-600">
-            <p>Estimated delivery: 12-26 days (Intl), 3-6 days (US)</p>
+
+          {/* 5. Buy Now */}
+          <button
+            onClick={handleBuyNow}
+            className="inline-block w-auto bg-gray-900 text-white px-6 py-2 rounded-lg hover:bg-black transition-transform hover:-translate-y-0.5"
+          >
+            BUY IT NOW
+          </button>
+
+          {/* 6. Delivery & Extras */}
+          <div className="text-sm text-gray-600 space-y-1">
+            <p className="inline-flex items-center gap-1">
+              <svg
+                className="w-4 h-4 text-green-600"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                <path d="M16 4h-3.6L10 0 7.6 4H4l3 3-1 5 5-3 5 3-1-5 3-3z" />
+              </svg>
+              Free shipping over $50
+            </p>
+            <p>Estimated delivery: 12–26 days (Intl), 3–6 days (US)</p>
             <p>Return within 45 days. Duties & taxes non-refundable.</p>
           </div>
         </div>
@@ -165,47 +212,51 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
 
       {/* Description Section */}
       <section className="container mx-auto px-4 py-8">
-        <h2 className="text-xl md:text-2xl font-bold mb-4">Description</h2>
-        <p className="text-gray-600 mb-6">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis orci non massa dignissim tempus. 
-          Fusce sed risus quis justo faucibus ullamcorper. Cras interdum dictum viverra.
-        </p>
-        <p className="text-gray-600 mb-6">
-          Sed imperdiet, nisl eget sollicitudin molestie, purus orci elementum neque, 
-          vitae tincidunt purus odio vitae libero. Morbi et interdum purus. Quisque consequat 
-          nunc mi, sed efficitur risus dapibus a.
-        </p>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-          <div>
-            <h3 className="text-lg font-semibold mb-2">Our Coffee Journey</h3>
-            <p className="text-gray-600 mb-4">
-              Amet consectetur adipisicing elit. Dolorum, accusantium, suscipit, vitae 
-              recusandae odit consectetur eaque sequi delectus nostrum nam nisi ab 
-              impedit ad facilis. Dolores facilis odio accusantium earum!
-            </p>
-            <p className="text-gray-600">
-              Quas rerum nisi fuga odio culpa amet, nesciunt doloremque inventore ducimus, 
-              consequatur officia nam, maxime provident a. Fugit deleniti aperiam tempore 
-              molestiae voluptatibus. Maecenas laoreet condimentum orci vel ultricies. 
-              Nullam quis neque lacinia, venenatis mi ac, vehicula orci.
-            </p>
-          </div>
-          {/* Right image (4th image from the array) */}
-          <div className="border rounded">
+        <h2 className="text-xl md:text-2xl font-bold mb-6">Description</h2>
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 items-start">
+          {/* Left: Nutrition Table */}
+          <table className="w-full table-auto border border-gray-200">
+            <thead className="bg-gray-100">
+              <tr>
+                <th className="border px-3 py-2 text-left">
+                  Nutritional Information
+                </th>
+                <th className="border px-3 py-2 text-left">Unit</th>
+                <th className="border px-3 py-2 text-left">Per 100g</th>
+              </tr>
+            </thead>
+            <tbody>
+              {nutrition.map((row) => (
+                <tr key={row.label}>
+                  <td className="border px-3 py-2">{row.label}</td>
+                  <td className="border px-3 py-2">{row.unit}</td>
+                  <td className="border px-3 py-2">{row.per100g}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+
+          {/* Right: Description Image */}
+          <div className="overflow-hidden rounded shadow-sm">
             <Image
-              src={productImages[3]}
-              alt="Description Image"
+              src={descImage}
+              alt={`${productName} detail`}
               width={600}
               height={400}
-              className="object-cover w-full h-auto"
+              className="object-cover w-full h-full"
             />
           </div>
         </div>
+
+        {/* Long Description Text below the grid */}
+        <p className="text-gray-600 leading-relaxed">{description}</p>
       </section>
 
       {/* You Might Also Like */}
       <section className="container mx-auto px-4 py-8">
-        <h2 className="text-xl md:text-2xl font-bold mb-6">You Might Also Like</h2>
+        <h2 className="text-xl md:text-2xl font-bold mb-6">
+          You Might Also Like
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {relatedProducts.map((item, idx) => (
             <div
@@ -225,5 +276,6 @@ export default function ProductDetail({ productSlug }: ProductDetailProps) {
         </div>
       </section>
     </main>
+
   );
 }

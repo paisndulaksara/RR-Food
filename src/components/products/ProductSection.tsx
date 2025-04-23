@@ -7,16 +7,16 @@ import Link from 'next/link';
 
 // Data arrays (with slug)
 const premixes = [
-  { name: 'RR Cafe', image: '/images/prod.png', slug: 'rr-cafe' },
-  { name: 'RR Tea', image: '/images/prod02.png', slug: 'rr-tea' },
-  { name: 'RR Ginger Tea', image: '/images/prod03.png', slug: 'rr-ginger-tea' },
-  { name: 'Hot Chocolate', image: '/images/prod04.png', slug: 'hot-chocolate' },
-  { name: 'RR Cardemom', image: '/images/prod05.png', slug: 'rr-cardemom' },
-  { name: 'Ginger Milk Tea', image: '/images/prod06.png', slug: 'ginger-milk-tea' },
-  { name: 'Masala Tea', image: '/images/prod07.png', slug: 'masala-tea' },
-  { name: 'Strawberry Tea', image: '/images/prod08.png', slug: 'strawberry-tea' },
-  { name: 'Cinnamon Tea', image: '/images/prod09.png', slug: 'cinnamon-tea' },
-  { name: 'Lemongrass Tea', image: '/images/prod10.png', slug: 'lemongrass-tea' },
+  { name: 'RR Cafe',             image: '/images/prod.png',           slug: 'rr-cafe' },
+  { name: 'RR Tea',              image: '/images/prod02.png',         slug: 'rr-tea' },
+  { name: 'RR Ginger Plain Tea', image: '/images/prod04.png',         slug: 'rr-ginger-plain-tea' },
+  { name: 'RR Hot Chocolate',    image: '/images/prod05.png',         slug: 'rr-hot-chocolate' },
+  { name: 'RR Cardamom Tea',     image: '/images/prod03.png',         slug: 'rr-cardamom-tea' },
+  { name: 'Ginger Milk Tea',     image: '/images/prod06.png',         slug: 'ginger-milk-tea' },
+  { name: 'RR Masala Tea',       image: '/images/prod07.png',         slug: 'rr-masala-tea' },
+  { name: 'RR Strawberry Tea',   image: '/images/prod08.png',         slug: 'rr-strawberry-tea' },
+  { name: 'Cinnamon Tea', image: '/images/prod10.png', slug: 'cinnamon-tea' },
+  { name: 'Lemongrass Tea', image: '/images/prod09.png', slug: 'lemongrass-tea' },
 ];
 
 const coffeeMachines = [
