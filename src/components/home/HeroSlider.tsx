@@ -52,7 +52,7 @@ const HeroSlider = () => {
                 className="object-cover"
               />
               {/* Overlay Text */}
-              <div className="absolute bottom-5 left-0 w-full h-full flex items-center z-10">
+              <div className="absolute bottom-18 left-0 w-full h-full flex items-center z-10">
                 <div className="container text-left max-w-[700px]">
                   <h4 className="text-white text-[24px] font-bold leading-tight">
                     {slide.subtitle}
