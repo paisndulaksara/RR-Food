@@ -1,7 +1,7 @@
 // src/app/layout.tsx
 import "./globals.css";
 import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer"; 
+import Footer from "@/components/common/Footer";
 import ContentWrapper from "@/components/common/ContentWrapper";
 
 export const metadata = {
@@ -15,13 +15,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body>
+    <html lang="en" suppressHydrationWarning>
+      <body className="bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
         <Header />
         {/* Use the client component for conditional padding */}
-        <ContentWrapper>
-          {children}
-        </ContentWrapper>
+        <ContentWrapper>{children}</ContentWrapper>
         <Footer />
       </body>
     </html>

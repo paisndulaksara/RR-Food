@@ -46,7 +46,7 @@ const VendingMachine = () => {
       : juiceMachines;
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-black">
       <div className="container">
         {/* Top Row: Heading (Left) & Tabs (Right) */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-8">

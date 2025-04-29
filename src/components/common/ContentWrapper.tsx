@@ -1,6 +1,6 @@
 // src/components/common/ContentWrapper.tsx
-'use client';
-import { usePathname } from 'next/navigation';
+"use client";
+import { usePathname } from "next/navigation";
 
 export default function ContentWrapper({
   children,
@@ -8,11 +8,7 @@ export default function ContentWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isHome = pathname === '/';
+  const isHome = pathname === "/";
 
-  return (
-    <main className={isHome ? "" : "pt-[120px]"}>
-      {children}
-    </main>
-  );
+  return <main className={isHome ? "" : "pt-[120px]"}>{children}</main>;
 }

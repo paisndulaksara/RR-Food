@@ -21,11 +21,11 @@ const teamMembers = [
 
 export default function OurTeam() {
   return (
-    <section className="py-16 bg-white text-center">
+    <section className="py-16 bg-white dark:bg-black text-center">
       <div className="container mx-auto px-4">
         {/* Section Title */}
-        <h2 className="text-3xl md:text-4xl font-bold mb-4">Behind The Brands</h2>
-        <p className="max-w-2xl mx-auto mb-10 text-gray-600">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">Behind The Brands</h2>
+        <p className="max-w-2xl mx-auto mb-10 text-gray-600 dark:text-white">
           We are a formidable brand, 100% communal team of collaborative dreamers who value 
           intuition, curiosity, and trendsetting fearlessness in everything that we do. 
           We take immeasurable pride in our work, relentlessly advancing the line 
@@ -47,8 +47,8 @@ export default function OurTeam() {
                 />
               </div>
               {/* Member Name & Role */}
-              <h4 className="text-xl font-semibold mb-1">{member.name}</h4>
-              <p className="text-gray-500">{member.role}</p>
+              <h4 className="text-xl font-semibold mb-1 dark:text-white">{member.name}</h4>
+              <p className="text-gray-500 dark:text-white">{member.role}</p>
             </div>
           ))}
         </div>

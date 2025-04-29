@@ -1,4 +1,3 @@
- // components/products/ProductSection.tsx
 'use client';
 
 import { useState } from 'react';
@@ -15,8 +14,8 @@ const premixes = [
   { name: 'Ginger Milk Tea',     image: '/images/prod06.png',         slug: 'ginger-milk-tea' },
   { name: 'RR Masala Tea',       image: '/images/prod07.png',         slug: 'rr-masala-tea' },
   { name: 'RR Strawberry Tea',   image: '/images/prod08.png',         slug: 'rr-strawberry-tea' },
-  { name: 'Cinnamon Tea', image: '/images/prod10.png', slug: 'cinnamon-tea' },
-  { name: 'Lemongrass Tea', image: '/images/prod09.png', slug: 'lemongrass-tea' },
+  { name: 'Cinnamon Tea',         image: '/images/prod10.png',        slug: 'cinnamon-tea' },
+  { name: 'Lemongrass Tea',       image: '/images/prod09.png',        slug: 'lemongrass-tea' },
 ];
 
 const coffeeMachines = [
@@ -40,7 +39,6 @@ type CategoryType = 'all' | 'premixes' | 'vending' | 'coffee' | 'juice';
 export default function ProductSection() {
   const [activeCategory, setActiveCategory] = useState<CategoryType>('all');
 
-  // Decide which products to display
   let displayedProducts;
   switch (activeCategory) {
     case 'premixes':
@@ -56,54 +54,49 @@ export default function ProductSection() {
       displayedProducts = juiceMachines;
       break;
     default:
-      displayedProducts = allProducts; // 'all'
+      displayedProducts = allProducts;
   }
 
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          
+
           {/* LEFT SIDEBAR (Filter) */}
-          <aside className="bg-gray-50 p-4 rounded shadow space-y-4">
-            <h2 className="text-xl font-bold mb-2">Categories</h2>
+          <aside className="bg-gray-50 dark:bg-gray-900 p-4 rounded shadow space-y-4">
+            <h2 className="text-xl font-bold mb-2 text-black dark:text-white">Categories</h2>
             <ul className="space-y-2">
-              {/* All */}
               <li>
                 <button
                   onClick={() => setActiveCategory('all')}
                   className={`block w-full text-left px-3 py-2 rounded transition ${
                     activeCategory === 'all'
-                      ? 'bg-gray-200 font-semibold'
-                      : 'hover:bg-gray-100'
+                      ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                   }`}
                 >
                   All
                 </button>
               </li>
-
-              {/* Premixes */}
               <li>
                 <button
                   onClick={() => setActiveCategory('premixes')}
                   className={`block w-full text-left px-3 py-2 rounded transition ${
                     activeCategory === 'premixes'
-                      ? 'bg-gray-200 font-semibold'
-                      : 'hover:bg-gray-100'
+                      ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                   }`}
                 >
                   Premixes
                 </button>
               </li>
-
-              {/* Vending Machines (parent) */}
               <li>
                 <button
                   onClick={() => setActiveCategory('vending')}
                   className={`block w-full text-left px-3 py-2 rounded transition ${
                     activeCategory === 'vending'
-                      ? 'bg-gray-200 font-semibold'
-                      : 'hover:bg-gray-100'
+                      ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+                      : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                   }`}
                 >
                   Vending Machines
@@ -116,8 +109,8 @@ export default function ProductSection() {
                       onClick={() => setActiveCategory('coffee')}
                       className={`block w-full text-left px-3 py-2 rounded transition ${
                         activeCategory === 'coffee'
-                          ? 'bg-gray-200 font-semibold'
-                          : 'hover:bg-gray-100'
+                          ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+                          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                       }`}
                     >
                       Coffee Machines
@@ -128,8 +121,8 @@ export default function ProductSection() {
                       onClick={() => setActiveCategory('juice')}
                       className={`block w-full text-left px-3 py-2 rounded transition ${
                         activeCategory === 'juice'
-                          ? 'bg-gray-200 font-semibold'
-                          : 'hover:bg-gray-100'
+                          ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+                          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
                       }`}
                     >
                       Juice Machines
@@ -147,7 +140,7 @@ export default function ProductSection() {
                 <Link
                   key={index}
                   href={`/products/${item.slug}`}
-                  className="bg-white text-center p-4 rounded shadow hover:shadow-lg transition"
+                  className="bg-white dark:bg-gray-900 text-center p-4 rounded shadow hover:shadow-lg transition"
                 >
                   <Image
                     src={item.image}
@@ -156,7 +149,7 @@ export default function ProductSection() {
                     height={150}
                     className="mx-auto mb-2 object-contain"
                   />
-                  <h4 className="font-semibold text-sm">{item.name}</h4>
+                  <h4 className="font-semibold text-sm text-black dark:text-white">{item.name}</h4>
                 </Link>
               ))}
             </div>

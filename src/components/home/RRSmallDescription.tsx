@@ -2,12 +2,12 @@
 
 const RRSmallDescription = () => {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-black">
       <div className="container mx-auto flex flex-col md:flex-row items-center gap-8">
         
         {/* LEFT COLUMN: Text */}
         <div className="md:w-1/2">
-          <h2 className="text-black text-3xl md:text-4xl leading-tight mb-2">
+          <h2 className="text-black  text-3xl md:text-4xl leading-tight mb-2">
             <span className="font-light">Taste the Freshness,</span>
             <br />
             <span className="font-bold">Savor the Quality!</span>
@@ -15,7 +15,7 @@ const RRSmallDescription = () => {
           <h3 className="text-[#e12c43] text-xl md:text-2xl font-normal mb-4">
             RR Premixes
           </h3>
-          <p className="text-black text-base md:text-lg mb-4 leading-relaxed">
+          <p className="text-black dark:text-white text-base md:text-lg mb-4 leading-relaxed">
             RR Food is dedicated to delivering high-quality, delicious, and innovative 
             food products to meet the diverse tastes of our customers. With a commitment 
             to excellence, freshness, and authenticity, we strive to provide nutritious 

@@ -1,6 +1,6 @@
-'use client';
-import Image from 'next/image';
-import Link from 'next/link';
+"use client";
+import Image from "next/image";
+import Link from "next/link";
 import {
   FaFacebookF,
   FaTwitter,
@@ -9,43 +9,57 @@ import {
   FaPinterestP,
   FaCcAmex,
   FaCcVisa,
-} from 'react-icons/fa';
+} from "react-icons/fa";
 
 const Footer = () => {
   return (
-    <footer className="bg-white border-t border-gray-200 py-8">
+    <footer className="bg-white dark:bg-black   border-t border-gray-200 py-8">
       {/* Top Row: 3 Columns with vertical dividers on md+ screens */}
       <div className="container grid grid-cols-1 md:grid-cols-3 md:divide-x divide-gray-300 gap-8  border-b border-gray-200">
-        
         {/* LEFT COLUMN: RR FOOD & SERVICES side by side */}
         <div className="px-4 border-b ">
           <div className="grid grid-cols-2 gap-8">
             {/* RR FOOD */}
             <div>
-              <h4 className="font-bold uppercase text-black mb-4">RR FOOD</h4>
+              <h4 className="font-bold uppercase text-black dark:text-white mb-4">RR FOOD</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="/" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="/"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     HOME
                   </Link>
                 </li>
                 <li>
-                  <Link href="/products" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="/products"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     PRODUCTS
                   </Link>
                 </li>
                 <li>
-                  <Link href="/vending-machine" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="/vending-machine"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     VENDING MACHINE
                   </Link>
                 </li>
                 <li>
-                  <Link href="/premixes" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="/premixes"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     PREMIXES
                   </Link>
                 </li>
                 <li>
-                  <Link href="/contact" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="/contact"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     CONTACT
                   </Link>
                 </li>
@@ -54,35 +68,53 @@ const Footer = () => {
 
             {/* SERVICES */}
             <div>
-              <h4 className="font-bold uppercase text-black mb-4">SERVICES</h4>
+              <h4 className="font-bold uppercase text-black dark:text-white mb-4">SERVICES</h4>
               <ul className="space-y-2 text-sm">
                 <li>
-                  <Link href="#" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="#"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     SITEMAP
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="#"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     PRIVACY POLICY
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="#"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     YOUR ACCOUNT
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="#"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     ADVANCED SEARCH
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="#"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     TERM & CONDITION
                   </Link>
                 </li>
                 <li>
-                  <Link href="#" className="text-black hover:text-[#e12c43] transition">
+                  <Link
+                    href="#"
+                    className="text-black dark:text-white hover:text-[#e12c43] transition"
+                  >
                     CONTACT US
                   </Link>
                 </li>
@@ -101,19 +133,39 @@ const Footer = () => {
             className="mx-auto mb-4"
           />
           <div className="flex gap-4 text-gray-600">
-            <a href="#" aria-label="Facebook" className="hover:text-[#e12c43] transition text-xl">
+            <a
+              href="#"
+              aria-label="Facebook"
+              className="hover:text-[#e12c43] transition text-xl"
+            >
               <FaFacebookF />
             </a>
-            <a href="#" aria-label="Twitter" className="hover:text-[#e12c43] transition text-xl">
+            <a
+              href="#"
+              aria-label="Twitter"
+              className="hover:text-[#e12c43] transition text-xl"
+            >
               <FaTwitter />
             </a>
-            <a href="#" aria-label="Instagram" className="hover:text-[#e12c43] transition text-xl">
+            <a
+              href="#"
+              aria-label="Instagram"
+              className="hover:text-[#e12c43] transition text-xl"
+            >
               <FaInstagram />
             </a>
-            <a href="#" aria-label="LinkedIn" className="hover:text-[#e12c43] transition text-xl">
+            <a
+              href="#"
+              aria-label="LinkedIn"
+              className="hover:text-[#e12c43] transition text-xl"
+            >
               <FaLinkedinIn />
             </a>
-            <a href="#" aria-label="Pinterest" className="hover:text-[#e12c43] transition text-xl">
+            <a
+              href="#"
+              aria-label="Pinterest"
+              className="hover:text-[#e12c43] transition text-xl"
+            >
               <FaPinterestP />
             </a>
           </div>

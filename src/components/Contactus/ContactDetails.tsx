@@ -3,14 +3,14 @@ import { FaMapMarkerAlt, FaPhone, FaRegClock, FaEnvelope } from 'react-icons/fa'
 
 export default function ContactDetails() {
   return (
-    <section className="py-16 bg-white">
+    <section className="py-16 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           
           {/* LEFT COLUMN: Contact Info */}
           <div>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">Contact Us</h2>
-            <p className="text-gray-600 mb-8">
+            <p className="text-gray-600  dark:text-white mb-8">
               If you would like to know more about our policies or have any questions,
               feel free to contact us anytime. We can also provide a tracking number via email after ordering.
             </p>
@@ -20,10 +20,10 @@ export default function ContactDetails() {
               
               {/* Address */}
               <div className="flex items-start gap-4">
-                <FaMapMarkerAlt className="text-xl text-gray-700 mt-1" />
+                <FaMapMarkerAlt className="text-xl text-gray-700 dark:text-white mt-1" />
                 <div>
-                  <h4 className="font-semibold text-gray-800">Address</h4>
-                  <p className="text-sm text-gray-600">
+                  <h4 className="font-semibold text-gray-800 dark:text-white">Address</h4>
+                  <p className="text-sm text-gray-600 dark:text-white">
                     123 RR Street, Coffee City, CA
                   </p>
                 </div>
@@ -31,19 +31,19 @@ export default function ContactDetails() {
 
               {/* Phone */}
               <div className="flex items-start gap-4">
-                <FaPhone className="text-xl text-gray-700 mt-1" />
+                <FaPhone className="text-xl text-gray-700 dark:text-white mt-1" />
                 <div>
-                  <h4 className="font-semibold text-gray-800">Phone</h4>
-                  <p className="text-sm text-gray-600">+1 555-1234</p>
+                  <h4 className="font-semibold text-gray-800 dark:text-white">Phone</h4>
+                  <p className="text-sm text-gray-600 dark:text-white">+1 555-1234</p>
                 </div>
               </div>
 
               {/* Open Hours */}
               <div className="flex items-start gap-4">
-                <FaRegClock className="text-xl text-gray-700 mt-1" />
+                <FaRegClock className="text-xl text-gray-700 dark:text-white mt-1" />
                 <div>
-                  <h4 className="font-semibold text-gray-800">Open Hours</h4>
-                  <p className="text-sm text-gray-600">
+                  <h4 className="font-semibold text-gray-800 dark:text-white">Open Hours</h4>
+                  <p className="text-sm text-gray-600 dark:text-white">
                     Monday - Friday: 09:00 - 17:30<br />
                     Saturday: 10:00 - 14:00
                   </p>
@@ -52,10 +52,10 @@ export default function ContactDetails() {
 
               {/* Email */}
               <div className="flex items-start gap-4">
-                <FaEnvelope className="text-xl text-gray-700 mt-1" />
+                <FaEnvelope className="text-xl text-gray-700 dark:text-white mt-1" />
                 <div>
-                  <h4 className="font-semibold text-gray-800">Email</h4>
-                  <p className="text-sm text-gray-600">info@rrfoods.com</p>
+                  <h4 className="font-semibold text-gray-800 dark:text-white">Email</h4>
+                  <p className="text-sm text-gray-600 dark:text-white">info@rrfoods.com</p>
                 </div>
               </div>
 
