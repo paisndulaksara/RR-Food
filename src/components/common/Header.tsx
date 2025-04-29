@@ -59,6 +59,10 @@ const Header = () => {
             <span>|</span>
             <Link href="/about">ABOUT US</Link>
             <span>|</span>
+            <Link href="/csr">CSR</Link>
+            <span>|</span>
+            <Link href="/gallery">Gallery</Link>
+            <span>|</span>
             <Link href="/contactus">CONTACT</Link>
           </nav>
 

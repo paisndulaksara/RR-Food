@@ -15,6 +15,8 @@ const products = [
   { name: 'Lemongrass Tea', slug: 'lemongrass-tea', image: '/images/prod09.png' },
 ];
 
+
+
 export default function ProductSection() {
   return (
     <section className="py-16 bg-white dark:bg-black">

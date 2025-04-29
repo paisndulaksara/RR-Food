@@ -71,3 +71,18 @@
 .bg-third {
   background-color: var(--color-third);
 }
+
+@keyframes slide-in-up {
+  0% {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-slide-in-up {
+  animation: slide-in-up 0.4s ease-out forwards;
+}
