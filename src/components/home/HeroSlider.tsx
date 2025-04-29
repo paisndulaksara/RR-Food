@@ -32,10 +32,10 @@ const slides = [
 const HeroSlider = () => {
   return (
     // Let the slider be in normal flow, full height
-    <section className="relative w-full h-[94vh]">
+    <section className="relative w-full h-[100vh]">
       <Swiper
         modules={[Autoplay, Pagination]}
-        // autoplay={{ delay: 5000, disableOnInteraction: false }}
+        autoplay={{ delay: 5000, disableOnInteraction: false }}
         loop={true}
         pagination={{ clickable: true }}
         className="h-full w-full"
