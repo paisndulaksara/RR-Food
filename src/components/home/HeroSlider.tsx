@@ -11,14 +11,14 @@ const slides = [
     image: '/images/02.jpg',
     title: 'Brewed Fresh,<br/>Served Fast',
     subtitle: ' RR CAFE',
-    description: 'Coffee on-demand, whenever you need it.Perfectly brewed, every time.',
+    description: 'Coffee on-demand, whenever you need it.<br/> Perfectly brewed, every time.',
   },
   {
     id: 2,
     image: '/images/03.jpg',
     title: 'Pressed for Freshness,<br/> Served in Seconds',
     subtitle: 'RR Cafe',
-    description: 'Fresh juice at the touch of a button. Feel the goodness in every sip!',
+    description: 'Fresh juice at the touch of a button. .<br/> P Feel the goodness in every sip!',
   },
   {
     id: 3,
