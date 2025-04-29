@@ -7,7 +7,7 @@ const CSRPage = () => {
       <div className="container mx-auto text-center">
         <h1 className="text-3xl md:text-4xl font-bold mb-6">Corporate Social Responsibility</h1>
         <p className="max-w-2xl mx-auto text-lg">
-          We're committed to making a positive impact on our community and the environment.
+          We committed to making a positive impact on our community and the environment.
           Stay tuned for updates about our CSR initiatives.
         </p>
       </div>
