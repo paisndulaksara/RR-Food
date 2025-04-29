@@ -37,7 +37,7 @@ export default function ProductSection() {
                 </div>
 
                 {/* Image on top */}
-                <div className="relative z-10 flex justify-center items-center p-6">
+                <div className="relative z-10 flex justify-center items-center p-4">
                   <Image
                     src={image}
                     alt={name}
