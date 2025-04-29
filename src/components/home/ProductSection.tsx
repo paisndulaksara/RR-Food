@@ -13,6 +13,8 @@ const products = [
   { name: 'RR Strawberry Tea', slug: 'rr-strawberry-tea', image: '/images/prod08.png' },
   { name: 'Cinnamon Tea', slug: 'cinnamon-tea', image: '/images/prod10.png' },
   { name: 'Lemongrass Tea', slug: 'lemongrass-tea', image: '/images/prod09.png' },
+  { name: 'RR Cafe Sugar free', slug: 'lemongrass-tea', image: '/images/prod12.png' },
+  { name: 'RR Tea Sugar free', slug: 'lemongrass-tea', image: '/images/prod11.png' },
 ];
 
 
