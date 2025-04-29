@@ -33,7 +33,7 @@ export default function ProductSection() {
                 {/* Black animated overlay */}
                 <div className="absolute inset-0 z-0">
                   <div className="h-[75%] group-hover:h-full bg-black transition-all duration-500 ease-in-out" />
-                  <div className="h-[25%] bg-[#f0f0f0]" />
+                  <div className="h-[25%] bg-[#0a0a0a]" />
                 </div>
 
                 {/* Image on top */}
