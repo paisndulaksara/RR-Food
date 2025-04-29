@@ -71,8 +71,8 @@ const HeroSlider = () => {
                       <Image
                         src={slide.cupImage}
                         alt="RR Cups"
-                        width={650}
-                        height={250}
+                        width={800}
+                        height={450}
                         className="object-contain"
                       />
                     </div>
