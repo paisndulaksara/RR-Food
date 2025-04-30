@@ -1,119 +1,93 @@
-"use client";
-import { useState } from "react";
-import Image from "next/image";
+'use client';
+import { useState } from 'react';
+import Image from 'next/image';
 
-// Coffee machines
+// Data
 const coffeeMachines = [
-  {
-    name: "2 Canisters Vending Machine",
-    image: "/images/two-canister.png",
-  },
-  {
-    name: "3 Canisters Vending Machine",
-    image: "/images/three-canister.png",
-  },
-  {
-    name: "4 Canisters Vending Machine",
-    image: "/images/four-cansiter.png",
-  },
+  { name: '2 Canisters Vending Machine', image: '/images/two-canister.png' },
+  { name: '3 Canisters Vending Machine', image: '/images/three-canister.png' },
+  { name: '4 Canisters Vending Machine', image: '/images/four-cansiter.png' },
 ];
 
-// Juice machines
 const juiceMachines = [
-  {
-    name: "2 Canisters Vending Machine",
-    image: "/images/fruit-two-canisters.png",
-  },
-  {
-    name: "3 Canisters Vending Machine",
-    image: "/images/fruit-three-canister.png",
-  },
+  { name: '2 Canisters Vending Machine', image: '/images/fruit-two-canisters.png' },
+  { name: '3 Canisters Vending Machine', image: '/images/fruit-three-canister.png' },
 ];
 
-// Combine them for the "All" tab
 const allMachines = [...coffeeMachines, ...juiceMachines];
 
-const VendingMachine = () => {
-  // Default to 'all' so all machines show on initial load
-  const [activeTab, setActiveTab] = useState<"all" | "coffee" | "juice">("all");
+export default function VendingMachine() {
+  const [activeTab, setActiveTab] = useState<'all' | 'coffee' | 'juice'>('all');
 
-  // Decide which array to show based on the active tab
   const machinesToShow =
-    activeTab === "all"
+    activeTab === 'all'
       ? allMachines
-      : activeTab === "coffee"
+      : activeTab === 'coffee'
       ? coffeeMachines
       : juiceMachines;
 
   return (
     <section className="py-16 bg-white dark:bg-black">
-      <div className="container">
-        {/* Top Row: Heading (Left) & Tabs (Right) */}
-        <div className="flex flex-col sm:flex-row justify-between items-center mb-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 sm:mb-0">
+      <div className="container mx-auto">
+        {/* Heading + Tabs */}
+        <div className="flex flex-col sm:flex-row justify-between items-center mb-10">
+          <h2 className="text-black dark:text-white text-3xl font-bold mb-4 sm:mb-0">
             Vending Machines
           </h2>
-
           <div className="flex gap-3 items-center">
-            {/* ALL TAB */}
-            <button
-              onClick={() => setActiveTab("all")}
-              className={`font-semibold ${
-                activeTab === "all" ? "text-[#e12c43] underline" : "text-black"
-              }`}
-            >
-              All
-            </button>
-            <span className="text-black">|</span>
-
-            {/* COFFEE TAB */}
-            <button
-              onClick={() => setActiveTab("coffee")}
-              className={`font-semibold ${
-                activeTab === "coffee"
-                  ? "text-[#e12c43] underline"
-                  : "text-black"
-              }`}
-            >
-              Coffee Machines
-            </button>
-            <span className="text-black">|</span>
-
-            {/* JUICE TAB */}
-            <button
-              onClick={() => setActiveTab("juice")}
-              className={`font-semibold ${
-                activeTab === "juice"
-                  ? "text-[#e12c43] underline"
-                  : "text-black"
-              }`}
-            >
-              Juice Machines
-            </button>
+            {['all', 'coffee', 'juice'].map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab as 'all' | 'coffee' | 'juice')}
+                className={`font-semibold capitalize ${
+                  activeTab === tab
+                    ? 'text-[#e12c43] underline'
+                    : 'text-black dark:text-white'
+                }`}
+              >
+                {tab === 'coffee' ? 'Coffee Machines' : tab === 'juice' ? 'Juice Machines' : 'All'}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Machines Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-6">
-          {machinesToShow.map((machine, index) => (
-            <div key={index} className="text-center bg-gray-50 p-4 rounded ">
-              
-              <Image
-                src={machine.image}
-                alt={machine.name}
-                width={200}
-                height={200}
-                className="mx-auto"
-              />
-              
-              <h4 className="text-black font-semibold mt-2">{machine.name}</h4>
-              <button className="text-[#e12c43] underline mt-1">REQUEST</button>
+        {/* Grid */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          {machinesToShow.map(({ name, image }, index) => (
+            <div key={index} className="flex flex-col items-center group cursor-pointer">
+              {/* Card */}
+              <div className="relative w-full rounded-lg shadow-lg overflow-hidden group-hover:shadow-2xl transition">
+                {/* Overlay */}
+                <div className="absolute inset-0 z-0">
+                  <div className="h-[75%] group-hover:h-full bg-black transition-all duration-500 ease-in-out" />
+                  <div className="h-[25%] bg-[#0a0a0a]" />
+                </div>
+
+                {/* Image */}
+                <div className="relative z-10 flex justify-center items-center p-4">
+                  <Image
+                    src={image}
+                    alt={name}
+                    width={180}
+                    height={180}
+                    className="object-contain"
+                  />
+                </div>
+              </div>
+
+              {/* Name & Button */}
+              <div className="mt-4 text-center">
+                <h4 className="text-lg font-semibold text-black dark:text-white group-hover:text-[#caa465] transition-colors duration-300">
+                  {name}
+                </h4>
+                <div className="text-sm text-[#e12c43] mt-1 underline group-hover:opacity-90">
+                  REQUEST
+                </div>
+              </div>
             </div>
           ))}
         </div>
       </div>
     </section>
   );
-};
-
-export default VendingMachine;
+}

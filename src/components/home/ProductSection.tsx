@@ -27,40 +27,35 @@ export default function ProductSection() {
 
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {products.map(({ name, slug, image }) => (
-            <Link key={slug} href={`/products/${slug}`} className="flex flex-col items-center group">
-              
-              {/* Card */}
-              <div className="relative w-full rounded-lg shadow-lg overflow-hidden group hover:shadow-2xl transition">
-                
-                {/* Black animated overlay */}
-                <div className="absolute inset-0 z-0">
-                  <div className="h-[75%] group-hover:h-full bg-black transition-all duration-500 ease-in-out" />
-                  <div className="h-[25%] bg-[#0a0a0a]" />
-                </div>
-
-                {/* Image on top */}
-                <div className="relative z-10 flex justify-center items-center p-4">
-                  <Image
-                    src={image}
-                    alt={name}
-                    width={180}
-                    height={180}
-                    className="object-contain"
-                  />
-                </div>
-              </div>
-
-              {/* Product title and shop now */}
-              <div className="mt-4 text-center">
-                <h4 className="text-lg font-semibold text-black dark:text-white group-hover:underline">
-                  {name}
-                </h4>
-                <div className="text-sm text-gray-400 dark:text-gray-500 group-hover:underline">
-                  Shop Now
-                </div>
-              </div>
-
-            </Link>
+             <Link key={slug} href={`/products/${slug}`}>
+             <div className="flex flex-col items-center group">
+               <div className="relative w-full rounded-lg shadow-lg overflow-hidden group-hover:shadow-2xl transition">
+                 <div className="absolute inset-0 z-0">
+                   <div className="h-[75%] group-hover:h-full bg-black transition-all duration-500 ease-in-out" />
+                   <div className="h-[25%] bg-[#0a0a0a]" />
+                 </div>
+                 <div className="relative z-10 flex justify-center items-center p-4">
+                   <Image
+                     src={image}
+                     alt={name}
+                     width={180}
+                     height={180}
+                     className="object-contain"
+                   />
+                 </div>
+               </div>
+           
+               <div className="mt-4 text-center">
+                 <h4 className="text-lg font-semibold text-black dark:text-white group-hover:text-[#caa465] transition-colors duration-300">
+                   {name}
+                 </h4>
+                 <div className="text-sm text-gray-400 dark:text-gray-500 group-hover:underline">
+                   Shop Now
+                 </div>
+               </div>
+             </div>
+           </Link>
+           
           ))}
         </div>
       </div>
