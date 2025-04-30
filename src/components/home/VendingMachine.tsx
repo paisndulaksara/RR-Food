@@ -27,11 +27,14 @@ export default function VendingMachine() {
       : juiceMachines;
 
   return (
-    <section className="py-16 bg-white dark:bg-black">
+    <section
+    className="py-16 bg-white dark:bg-black bg-cover bg-center"
+    style={{ backgroundImage: 'url("/images/ma_back.jpg")' }}
+  >
       <div className="container mx-auto">
         {/* Heading + Tabs */}
         <div className="flex flex-col sm:flex-row justify-between items-center mb-10">
-          <h2 className="text-black dark:text-white text-3xl font-bold mb-4 sm:mb-0">
+          <h2 className="text-white dark:text-white text-3xl font-bold mb-4 sm:mb-0">
             Vending Machines
           </h2>
           <div className="flex gap-3 items-center">
@@ -42,7 +45,7 @@ export default function VendingMachine() {
                 className={`font-semibold capitalize ${
                   activeTab === tab
                     ? 'text-[#e12c43] underline'
-                    : 'text-black dark:text-white'
+                    : 'text-white dark:text-white'
                 }`}
               >
                 {tab === 'coffee' ? 'Coffee Machines' : tab === 'juice' ? 'Juice Machines' : 'All'}
@@ -77,7 +80,7 @@ export default function VendingMachine() {
 
               {/* Name & Button */}
               <div className="mt-4 text-center">
-                <h4 className="text-lg font-semibold text-black dark:text-white group-hover:text-[#caa465] transition-colors duration-300">
+                <h4 className="text-lg font-semibold text-white dark:text-white group-hover:text-[#caa465] transition-colors duration-300">
                   {name}
                 </h4>
                 <div className="text-sm text-[#e12c43] mt-1 underline group-hover:opacity-90">
