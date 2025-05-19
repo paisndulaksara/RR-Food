@@ -3,6 +3,7 @@ import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 import ContentWrapper from "@/components/common/ContentWrapper";
+import WhatsAppButton from "@/components/common/WhatsAppButton";
 
 export const metadata = {
   title: "RR Foods",
@@ -21,6 +22,7 @@ export default function RootLayout({
         {/* Use the client component for conditional padding */}
         <ContentWrapper>{children}</ContentWrapper>
         <Footer />
+        <WhatsAppButton /> 
       </body>
     </html>
   );
