@@ -1,4 +1,4 @@
-'use client';
+"use client";
 import { useState } from "react";
 import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
@@ -45,7 +45,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       {/* Breadcrumb */}
       <div className="container mx-auto px-4 py-4 text-sm text-gray-500 dark:text-white">
         Home &gt;{" "}
-        <span className="text-gray-700 font-medium dark:text-gray-200">{productName}</span>
+        <span className="text-gray-700 font-medium dark:text-gray-200">
+          {productName}
+        </span>
       </div>
 
       {/* Main 2-Column Layout */}
@@ -104,10 +106,14 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <div className="flex items-center gap-2">
             <div className="flex text-[#c9a566]">
               {"★★★★★".split("").map((star, i) => (
-                <span key={i} className="text-2xl tracking-wide">{star}</span>
+                <span key={i} className="text-2xl tracking-wide">
+                  {star}
+                </span>
               ))}
             </div>
-            <span className="text-sm text-gray-500 dark:text-white">(0 reviews)</span>
+            <span className="text-sm text-gray-500 dark:text-white">
+              (0 reviews)
+            </span>
           </div>
 
           <div className="flex items-baseline gap-4">
@@ -128,9 +134,24 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
           {/* Short Description */}
           <div className="text-sm text-gray-600 dark:text-white space-y-2">
-            <p><strong>Ingredients:</strong> {ingredients.join(", ")}.</p>
-            <p><strong>Serves:</strong> up to {cups} cups.</p>
-            <p><strong>Net Weight:</strong> {weight}</p>
+            <p>
+              <strong>Ingredients:</strong> {ingredients.join(", ")}.
+            </p>
+            <p>
+              <strong>Serves:</strong> up to {cups} cups.
+            </p>
+            <p>
+              <strong>Net Weight:</strong> {weight}
+            </p>
+            <div className="mt-4">
+              <Image
+                src="/images/certificate.jpg"
+                alt="Certified Product"
+                width={300}
+                height={100}
+                className="object-contain rounded shadow-md"
+              />
+            </div>
           </div>
 
           {/* Quantity + Buttons */}
@@ -160,9 +181,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </button>
 
           <div className="text-sm text-gray-600 dark:text-white space-y-1">
-            <p>Free shipping over $50</p>
+            {/* <p>Free shipping over $50</p>
             <p>Estimated delivery: 12–26 days (Intl), 3–6 days (US)</p>
-            <p>Return within 45 days. Duties & taxes non-refundable.</p>
+            <p>Return within 45 days. Duties & taxes non-refundable.</p> */}
+            <p className="text-gray-600 dark:text-white leading-relaxed">
+              {description}
+            </p>
           </div>
         </div>
       </section>
@@ -174,7 +198,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           <table className="w-full table-auto border border-gray-200 dark:border-gray-700">
             <thead className="bg-gray-100 dark:bg-gray-800">
               <tr>
-                <th className="border px-3 py-2 text-left">Nutritional Information</th>
+                <th className="border px-3 py-2 text-left">
+                  Nutritional Information
+                </th>
                 <th className="border px-3 py-2 text-left">Unit</th>
                 <th className="border px-3 py-2 text-left">Per 100g</th>
               </tr>
@@ -201,12 +227,16 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
         </div>
 
-        <p className="text-gray-600 dark:text-white leading-relaxed">{description}</p>
+        <p className="text-gray-600 dark:text-white leading-relaxed">
+          {description}
+        </p>
       </section>
 
       {/* You Might Also Like */}
       <section className="container mx-auto px-4 py-8">
-        <h2 className="text-xl md:text-2xl font-bold mb-6">You Might Also Like</h2>
+        <h2 className="text-xl md:text-2xl font-bold mb-6">
+          You Might Also Like
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
           {relatedProducts.map((item, idx) => (
             <div
@@ -220,7 +250,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 height={120}
                 className="mx-auto mb-2 object-contain"
               />
-              <h4 className="font-semibold text-sm text-black dark:text-white">{item.name}</h4>
+              <h4 className="font-semibold text-sm text-black dark:text-white">
+                {item.name}
+              </h4>
             </div>
           ))}
         </div>

@@ -138,7 +138,7 @@ const Header = () => {
               height={100}
               className="mx-auto"
             />
-            <span className={`${textColor} text-xs mt-1`}>SINCE 2007</span>
+            <span className={`${textColor} text-xs mt-1`}>SINCE 2012</span>
           </div>
         </div>
 
@@ -176,7 +176,7 @@ const Header = () => {
       </div>
 
       {/* Gradient border bottom */}
-      <div className="absolute top-[80px] left-0 right-0 h-[1px] bg-[#c9a566]/60 z-0">
+      <div className="absolute top-[92px] left-0 right-0 h-[1px] bg-[#c9a566]/60 z-0">
         <div className="absolute left-0 top-0 h-full w-[80px] bg-gradient-to-r from-black to-transparent" />
         <div className="absolute right-0 top-0 h-full w-[80px] bg-gradient-to-l from-black to-transparent" />
       </div>

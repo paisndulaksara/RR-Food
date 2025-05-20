@@ -1,5 +1,5 @@
 // src/components/common/ContentWrapper.tsx
-"use client";
+ "use client";
 import { usePathname } from "next/navigation";
 
 export default function ContentWrapper({
@@ -8,7 +8,9 @@ export default function ContentWrapper({
   children: React.ReactNode;
 }) {
   const pathname = usePathname();
-  const isHome = pathname === "/";
 
-  return <main className={isHome ? "" : "pt-[px]"}>{children}</main>;
+  const isProductInnerPage =
+    pathname.startsWith("/products/") && pathname !== "/products";
+
+  return <main className={isProductInnerPage ? "pt-[110px]" : ""}>{children}</main>;
 }
