@@ -6,15 +6,15 @@ const AboutBanner = () => {
     <section className="relative w-full h-[450px] overflow-hidden">
       {/* Background Image */}
       <Image
-        src="/images/aboutBanner.jpg"  // your background image path
+        src="/images/Topbanner.jpg"  // your background image path
         alt="About Banner"
         fill
         priority
-        className="object-cover"
+        className="object-contain"
       />
 
       {/* Optional Overlay for better text contrast */}
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0 " />
 
       {/* Text Content on the left side */}
       <div className="absolute left-0 top-0 w-full h-full flex items-center">

@@ -10,5 +10,5 @@ export default function ContentWrapper({
   const pathname = usePathname();
   const isHome = pathname === "/";
 
-  return <main className={isHome ? "" : "pt-[120px]"}>{children}</main>;
+  return <main className={isHome ? "" : "pt-[px]"}>{children}</main>;
 }

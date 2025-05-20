@@ -26,8 +26,7 @@ const Header = () => {
   useEffect(() => {
     document.documentElement.classList.toggle('dark', darkMode);
   }, [darkMode]);
-
-  const toggleDarkMode = () => setDarkMode(prev => !prev);
+ 
 
   const textColor = isHome && !scrolled ? 'text-white' : 'text-black dark:text-white';
   const backgroundClass = isHome && !scrolled ? 'bg-transparent' : 'bg-white dark:bg-black';
@@ -42,6 +41,34 @@ const Header = () => {
       setAboutDropdown(false);
     }, 150);
   };
+
+  useEffect(() => {
+    const storedTheme = localStorage.getItem("theme");
+  
+    if (storedTheme === "light") {
+      setDarkMode(false);
+      document.documentElement.classList.remove("dark");
+    } else {
+      // default to dark
+      setDarkMode(true);
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    }
+  }, []);
+  
+  const toggleDarkMode = () => {
+    const newTheme = !darkMode;
+    setDarkMode(newTheme);
+  
+    if (newTheme) {
+      document.documentElement.classList.add("dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+      localStorage.setItem("theme", "light");
+    }
+  };
+  
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 transition-colors duration-300">

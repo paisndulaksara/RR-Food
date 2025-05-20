@@ -5,12 +5,12 @@ export default function ProductBanner() {
   return (
     <section className="relative w-full h-[450px] overflow-hidden">
       <Image
-        src="/images/aboutBanner.jpg" // replace with your actual banner
+        src="/images/Topbanner.jpg" // replace with your actual banner
         alt="Products Banner"
         fill
-        className="object-cover"
+        className="object-contain"
       />
-      <div className="absolute inset-0 bg-black/30" />
+      <div className="absolute inset-0" />
       <div className="absolute inset-0 flex items-center">
         <div className="container px-4">
           <h4 className="text-white text-xl font-semibold mb-1">RR Foods</h4>
