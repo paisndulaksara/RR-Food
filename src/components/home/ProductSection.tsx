@@ -31,8 +31,8 @@ export default function ProductSection() {
              <div className="flex flex-col items-center group">
                <div className="relative w-full rounded-lg shadow-lg overflow-hidden group-hover:shadow-2xl transition">
                  <div className="absolute inset-0 z-0">
-                   <div className="h-[75%] group-hover:h-full bg-black transition-all duration-500 ease-in-out" />
-                   <div className="h-[25%] bg-[#0a0a0a]" />
+                   <div className="h-[75%] group-hover:h-full dark:bg-black transition-all duration-500 ease-in-out" />
+                   <div className="h-[25%] dark:bg-[#424242] bg-[#ececec] " />
                  </div>
                  <div className="relative z-10 flex justify-center items-center p-4">
                    <Image
