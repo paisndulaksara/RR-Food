@@ -63,7 +63,7 @@ export default function VendingMachine() {
                 {/* Overlay */}
                 <div className="absolute inset-0 z-0">
                   <div className="h-[75%] group-hover:h-full bg-black transition-all duration-500 ease-in-out" />
-                  <div className="h-[25%] dark:bg-[#0a0a0a] bg-[#424242]" />
+                  <div className="h-[25%] dark:bg-[#424242] bg-[#ececec]" />
                 </div>
 
                 {/* Image */}
