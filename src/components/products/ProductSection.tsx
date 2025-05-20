@@ -63,7 +63,7 @@ export default function ProductSection() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
           {/* LEFT SIDEBAR (Filter) */}
-          <aside className="bg-gray-50 dark:bg-gray-900 p-4 rounded shadow space-y-4">
+          <aside className="bg-gray-50 dark:bg-[#121212] p-4 rounded shadow space-y-4">
             <h2 className="text-xl font-bold mb-2 text-black dark:text-white">Categories</h2>
             <ul className="space-y-2">
               <li>
@@ -72,7 +72,7 @@ export default function ProductSection() {
                   className={`block w-full text-left px-3 py-2 rounded transition ${
                     activeCategory === 'all'
                       ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                      : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                      : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
                   }`}
                 >
                   All
@@ -84,7 +84,7 @@ export default function ProductSection() {
                   className={`block w-full text-left px-3 py-2 rounded transition ${
                     activeCategory === 'premixes'
                       ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                      : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                      : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
                   }`}
                 >
                   Premixes
@@ -96,7 +96,7 @@ export default function ProductSection() {
                   className={`block w-full text-left px-3 py-2 rounded transition ${
                     activeCategory === 'vending'
                       ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                      : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                      : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
                   }`}
                 >
                   Vending Machines
@@ -110,7 +110,7 @@ export default function ProductSection() {
                       className={`block w-full text-left px-3 py-2 rounded transition ${
                         activeCategory === 'coffee'
                           ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                          : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
                       }`}
                     >
                       Coffee Machines
@@ -122,7 +122,7 @@ export default function ProductSection() {
                       className={`block w-full text-left px-3 py-2 rounded transition ${
                         activeCategory === 'juice'
                           ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                          : 'hover:bg-gray-100 dark:hover:bg-gray-800'
+                          : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
                       }`}
                     >
                       Juice Machines
@@ -140,7 +140,7 @@ export default function ProductSection() {
                 <Link
                   key={index}
                   href={`/products/${item.slug}`}
-                  className="bg-white dark:bg-gray-900 text-center p-4 rounded shadow hover:shadow-lg transition"
+                  className="bg-white dark:bg-[#121212] text-center p-4 rounded shadow hover:shadow-lg transition"
                 >
                   <Image
                     src={item.image}
