@@ -2,7 +2,15 @@
 import Image from "next/image";
 import { useState } from "react";
 
-const teamRows = [
+interface TeamMember {
+  name: string;
+  role: string;
+  image: string;
+  message?: string; // ✅ Mark as optional
+}
+
+
+const teamRows: TeamMember[][] = [
   [
     {
       name: "Mr. R.P. Jayasinghe",
