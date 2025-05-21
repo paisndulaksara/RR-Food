@@ -89,7 +89,7 @@ export default function OurTeam() {
   const [modalMessage, setModalMessage] = useState<string | null>(null);
 
   return (
-    <section className="py-16 bg-white dark:bg-black text-center relative">
+    <section className="pb-16 bg-white dark:bg-black text-center relative">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 dark:text-white">
           Behind The Brands

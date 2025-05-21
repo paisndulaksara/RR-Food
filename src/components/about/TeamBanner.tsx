@@ -1,21 +1,21 @@
 'use client';
 import Image from 'next/image';
 
-export default function ProductBanner() {
+export default function TeamBanner() {
   return (
     <section className="relative w-full h-[400px] overflow-hidden">
       <Image
-        src="/images/Topbanner.jpg" // replace with your actual banner
-        alt="Products Banner"
+        src="/images/Topbanner.jpg"
+        alt="Contact Banner"
         fill
         className="object-contain"
       />
-      <div className="absolute inset-0" />
+      <div className="absolute inset-0 bg-black/30" />
       <div className="absolute inset-0 flex items-center">
         <div className="container px-4">
           <h4 className="text-white text-xl font-semibold mb-1">RR Foods</h4>
-          <h1 className="text-white text-4xl font-bold mb-2">Products</h1>
-          <p className="text-white text-sm">HOME &gt; PRODUCTS</p>
+          <h1 className="text-white text-4xl font-bold mb-2">Our Team</h1>
+          <p className="text-white text-sm">HOME &gt; OUR TEAM</p>
         </div>
       </div>
     </section>

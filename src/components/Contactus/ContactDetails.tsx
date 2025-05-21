@@ -3,7 +3,7 @@ import { FaMapMarkerAlt, FaPhone, FaRegClock, FaEnvelope } from 'react-icons/fa'
 
 export default function ContactDetails() {
   return (
-    <section className="py-16 bg-white dark:bg-black">
+    <section className="pb-16 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
           

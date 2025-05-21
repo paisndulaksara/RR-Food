@@ -1,4 +1,3 @@
-// src/components/common/ContentWrapper.tsx
 "use client";
 import { usePathname } from "next/navigation";
 
@@ -9,14 +8,13 @@ export default function ContentWrapper({
 }) {
   const pathname = usePathname();
 
+  // Product details only (not main /products page)
   const isProductInnerPage =
     pathname.startsWith("/products/") && pathname !== "/products";
 
-  const applyPaddingPages = [
-    "/gallery",
-    "/csr",
-    "/about/team",
-    "/about/innovation",
+  // Add other routes that NEED top padding (if any)
+  const applyPaddingPages: string[] = [
+    // e.g., "/custom-page" (only if it has no banner)
   ];
 
   const shouldApplyPadding =

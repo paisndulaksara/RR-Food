@@ -1,4 +1,6 @@
 'use client';
+import GalleryBanner from "../../components/Gallery/GalleryBanner";
+
 const galleryImages = [
   'https://images.unsplash.com/photo-1588854337221-4f32a6f4ca4c',
   'https://images.unsplash.com/photo-1504674900247-0877df9cc836',
@@ -13,28 +15,32 @@ const galleryImages = [
 
 export default function GalleryPage() {
   return (
-    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white py-16 px-4">
-      <div className="container mx-auto">
-        <div className="text-center max-w-3xl mx-auto mb-12">
-          <h1 className="text-4xl font-bold mb-4">Gallery</h1>
-          <p className="text-lg">
-            Explore highlights from our product showcases, CSR initiatives, and community events.
-          </p>
-        </div>
+    <main className="min-h-screen bg-white dark:bg-black text-black dark:text-white">
+      <GalleryBanner />
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-          {galleryImages.map((url, idx) => (
-            <div key={idx} className="overflow-hidden rounded-lg shadow">
-              <img
-                src={url}
-                alt={`Gallery Image ${idx + 1}`}
-                className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
-                loading="lazy"
-              />
-            </div>
-          ))}
+      <section className="pb-16 px-4">
+        <div className="container mx-auto">
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h1 className="text-4xl font-bold mb-4">Gallery</h1>
+            <p className="text-lg">
+              Explore highlights from our product showcases, CSR initiatives, and community events.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+            {galleryImages.map((url, idx) => (
+              <div key={idx} className="overflow-hidden rounded-lg shadow-md">
+                <img
+                  src={url}
+                  alt={`Gallery Image ${idx + 1}`}
+                  className="w-full h-64 object-cover hover:scale-105 transition-transform duration-300"
+                  loading="lazy"
+                />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      </section>
     </main>
   );
 }

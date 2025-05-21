@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const AboutBanner = () => {
   return (
-    <section className="relative w-full h-[450px] overflow-hidden">
+    <section className="relative w-full h-[400px] overflow-hidden">
       {/* Background Image */}
       <Image
         src="/images/Topbanner.jpg"  // your background image path

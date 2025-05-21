@@ -3,7 +3,7 @@ import Image from 'next/image';
 
 const OurStory = () => {
   return (
-    <section className="py-16 bg-white dark:bg-black">
+    <section className="pb-16 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
 
         {/* Section Title */}

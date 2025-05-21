@@ -2,7 +2,7 @@
 
 export default function ProductInnovation() {
   return (
-    <section className="py-16 bg-white dark:bg-black text-center">
+    <section className="pb-16 bg-white dark:bg-black text-center">
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold mb-8 dark:text-white">
           PRODUCT INNOVATION

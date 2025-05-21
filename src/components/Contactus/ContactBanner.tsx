@@ -3,14 +3,13 @@ import Image from 'next/image';
 
 export default function ContactBanner() {
   return (
-    <section className="relative w-full h-[450px] overflow-hidden">
+    <section className="relative w-full h-[400px] overflow-hidden">
       <Image
-        src="/images/aboutBanner.jpg"
+        src="/images/Topbanner.jpg"
         alt="Contact Banner"
         fill
-        className="object-cover"
-      />
-      <div className="absolute inset-0 bg-black/30" />
+        className="object-contain"
+      /> 
       <div className="absolute inset-0 flex items-center">
         <div className="container px-4">
           <h4 className="text-white text-xl font-semibold mb-1">RR Foods</h4>

@@ -58,7 +58,7 @@ export default function ProductSection() {
   }
 
   return (
-    <section className="py-16 bg-white dark:bg-black">
+    <section className="pb-16 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
