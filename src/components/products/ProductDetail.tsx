@@ -30,8 +30,15 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   const decrementQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
   const handleAddToCart = () =>
     console.log(`Added ${quantity} of ${productName} to cart`);
-  const handleBuyNow = () =>
-    console.log(`Buying ${quantity} of ${productName} immediately`);
+  
+  const handleBuyNow = () => {
+    const message = `Hi, I'm interested in buying ${quantity} of "${productName}". Please provide the details.`;
+    const encodedMessage = encodeURIComponent(message);
+    const phone = "+94770562303"; // Your WhatsApp number without `+` or spaces
+    const whatsappURL = `https://wa.me/${phone}?text=${encodedMessage}`;
+    window.open(whatsappURL, "_blank");
+  };
+  
 
   const relatedProducts = [
     { name: "RR Cafe", image: "/images/prod.png" },

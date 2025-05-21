@@ -4,7 +4,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useState, useEffect, useRef } from 'react';
 import {
-  FiSearch, FiHeart, FiShoppingCart, FiMenu, FiX, FiMoon, FiSun,
+    FiMenu, FiX, FiMoon, FiSun,
+    FiShoppingCart,
 } from 'react-icons/fi';
 
 const Header = () => {
@@ -121,9 +122,10 @@ const Header = () => {
           {/* Desktop Icons */}
           <div className={`hidden lg:flex gap-6 items-center text-base pt-2 ${textColor}`}>
             <Link href="/login">LOGIN</Link>
-            <FiSearch className="cursor-pointer text-lg" />
+            {/* <FiSearch className="cursor-pointer text-lg" />
             <FiHeart className="cursor-pointer text-lg" />
-            <FiShoppingCart className="cursor-pointer text-lg" />
+            <FiShoppingCart className="cursor-pointer text-lg" /> */}
+            <FiShoppingCart className="cursor-pointer text-lg" /> 
             <button onClick={toggleDarkMode}>
               {darkMode ? <FiSun size={22} /> : <FiMoon size={22} />}
             </button>
