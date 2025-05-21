@@ -135,7 +135,7 @@ export default function ProductSection() {
 
           {/* RIGHT CONTENT: Products */}
           <div className="md:col-span-3">
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-6 group">
               {displayedProducts.map((item, index) => (
                 <Link
                   key={index}
@@ -149,7 +149,7 @@ export default function ProductSection() {
                     height={150}
                     className="mx-auto mb-2 object-contain"
                   />
-                  <h4 className="font-semibold text-sm text-black dark:text-white">{item.name}</h4>
+                  <h4 className="font-semibold text-sm text-black dark:text-white hover:text-[#caa465]">{item.name}</h4>
                 </Link>
               ))}
             </div>

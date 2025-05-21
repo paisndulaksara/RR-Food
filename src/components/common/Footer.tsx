@@ -14,8 +14,7 @@ import {
   FaEnvelope,
 } from "react-icons/fa";
 
-const Footer = () => { 
-
+const Footer = () => {
   return (
     <footer className="bg-white dark:bg-black py-8">
       <div className="container grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -134,7 +133,8 @@ const Footer = () => {
             <div>
               <span className="font-bold">Address</span>
               <br />
-              123 RR Street, Coffee City, CA
+              No 139/C Newdawa, Aroggoda <br />
+              Alubomulla, Panadura, Sri Lanka
             </div>
           </div>
           <div className="flex items-start gap-3">
@@ -142,7 +142,18 @@ const Footer = () => {
             <div>
               <span className="font-bold">Phone</span>
               <br />
-              +1 555-1234
+              <a
+                href="tel:+94382230875"
+                className="block hover:text-[#c9a566] transition"
+              >
+                +94 38 2230 875
+              </a>
+              <a
+                href="tel:+94770358117"
+                className="block hover:text-[#c9a566] transition"
+              >
+                +94 77 0358 117
+              </a>
             </div>
           </div>
           <div className="flex items-start gap-3">

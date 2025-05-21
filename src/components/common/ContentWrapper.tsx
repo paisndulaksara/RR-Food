@@ -1,5 +1,5 @@
 // src/components/common/ContentWrapper.tsx
- "use client";
+"use client";
 import { usePathname } from "next/navigation";
 
 export default function ContentWrapper({
@@ -12,5 +12,15 @@ export default function ContentWrapper({
   const isProductInnerPage =
     pathname.startsWith("/products/") && pathname !== "/products";
 
-  return <main className={isProductInnerPage ? "pt-[110px]" : ""}>{children}</main>;
+  const applyPaddingPages = [
+    "/gallery",
+    "/csr",
+    "/about/team",
+    "/about/innovation",
+  ];
+
+  const shouldApplyPadding =
+    isProductInnerPage || applyPaddingPages.includes(pathname);
+
+  return <main className={shouldApplyPadding ? "pt-[110px]" : ""}>{children}</main>;
 }
