@@ -8,8 +8,14 @@ export async function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
 }
 
-// ✅ This works 100% in both dev and Vercel builds
-export default async function ProductPage({ params }: any) {
+// ✅ Safe and Vercel-friendly type
+interface ProductPageProps {
+  params: {
+    slug: string;
+  };
+}
+
+export default async function ProductPage({ params }: ProductPageProps) {
   const product = await getProductBySlug(params.slug);
 
   if (!product) {
