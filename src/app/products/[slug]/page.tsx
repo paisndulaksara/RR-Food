@@ -23,7 +23,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <main className="p-8 text-center dark:bg-black">
         <h1 className="text-3xl font-bold mb-4">Coming Soon</h1>
         <p className="text-lg">
-          Details for “{params.slug.replace(/-/g, " ")}” will be available shortly.
+          Details for “{params.slug.replace(/-/g, " ")}” will be available shortly .
         </p>
       </main>
     );
