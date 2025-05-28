@@ -8,15 +8,20 @@ export async function generateStaticParams() {
   return products.map((product) => ({ slug: product.slug }));
 }
 
-// ✅ Properly typed Props to silence ESLint & Vercel bug
-type Props = {
-  params: { slug: string };
-};
+// Define proper types for the params Promise
+type Params = Promise<{ slug: string }>;
+
+// Define Props interface with correct Promise typing
+interface Props {
+  params: Params;
+}
 
 export default async function ProductPage({ params }: Props) {
-  const { slug } = await Promise.resolve(params); // ← build-safe & type-safe
+  // Await the params Promise directly
+  const { slug } = await params;
+  
   const product = await getProductBySlug(slug);
-
+  
   if (!product) {
     return (
       <main className="p-8 text-center dark:bg-black">
@@ -27,6 +32,6 @@ export default async function ProductPage({ params }: Props) {
       </main>
     );
   }
-
+  
   return <ProductDetail product={product} />;
 }
