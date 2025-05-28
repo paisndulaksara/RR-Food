@@ -1,5 +1,7 @@
 // src/lib/products.ts
 
+
+
 export interface NutritionRow {
   label: string;
   unit: string;
@@ -7,26 +9,33 @@ export interface NutritionRow {
 }
 
 export interface Product {
+  id:number;
   slug: string;
   name: string;
   price: number;
   oldPrice?: number;
-  ingredients: string[];   // for shortDescription
-  cups: number;            // for "Can save X cups"
-  weight: string;          // for "1KG" or "800g"
-  nutrition: NutritionRow[];
-  images: string[];        // first 3 used in your Swiper, + descImage separately
-  descImage: string;       // image for the Description section
-  description: string;     // long text under “Description”
+  images: string[];
+  descImage: string;
+  description: string;
   category: string;
+  videoUrl?: string;
+  // Drink-specific
+  ingredients?: string[];
+  cups?: number;
+  weight?: string;
+  nutrition?: NutritionRow[];
+  // Machine-specific
+  specs?: { key: string; value: string }[];
 }
 
 const products: Product[] = [
   {
+    id: 1,
     slug: 'rr-cafe',
     name: 'RR Cafe',
     price: 65.0,
     oldPrice: 75.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Full Cream Milk Powder', 'Sugar', 'Instant Coffee', 'Maltodextrin'],
     cups: 50,
     weight: '1KG',
@@ -50,10 +59,12 @@ const products: Product[] = [
     category: 'Coffee',
   },
   {
+    id: 2,
     slug: 'rr-tea',
     name: 'RR Tea',
     price: 60.0,
     oldPrice: 70.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Full Cream Milk Powder', 'Sugar', 'Soluble Tea'],
     cups: 50,
     weight: '1KG',
@@ -76,9 +87,11 @@ const products: Product[] = [
     category: 'Tea',
   },
   {
+    id: 3,
     slug: 'rr-ginger-plain-tea',
     name: 'RR Ginger Plain Tea',
     price: 58.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Natural Ginger', 'Sugar', 'Soluble Tea'],
     cups: 50,
     weight: '800g',
@@ -101,9 +114,11 @@ const products: Product[] = [
     category: 'Tea',
   },
   {
+    id: 4,
     slug: 'rr-hot-chocolate',
     name: 'RR Hot Chocolate',
     price: 55.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Sugar', 'Full Cream Milk Powder', 'Maltodextrin', 'Chocolate Powder'],
     cups: 40,
     weight: '800g',
@@ -126,9 +141,11 @@ const products: Product[] = [
     category: 'Beverage',
   },
   {
+    id: 5,
     slug: 'rr-cardamom-tea',
     name: 'RR Cardamom Tea',
     price: 62.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Cardamom', 'Full Cream Milk Powder', 'Sugar', 'Soluble Tea'],
     cups: 50,
     weight: '1KG',
@@ -151,9 +168,11 @@ const products: Product[] = [
     category: 'Tea',
   },
   {
+    id: 6,
     slug: 'ginger-milk-tea',
     name: 'Ginger Milk Tea',
     price: 60.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Sugar', 'Full Cream Milk Powder', 'Soluble Tea', 'Natural Ginger'],
     cups: 50,
     weight: '1KG',
@@ -176,9 +195,11 @@ const products: Product[] = [
     category: 'Tea',
   },
   {
+    id: 7,
     slug: 'rr-masala-tea',
     name: 'RR Masala Tea',
     price: 58.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Sugar', 'Full Cream Milk Powder', 'Soluble Tea', 'Maltodextrin', 'Natural Masala Powder'],
     cups: 50,
     weight: '1KG',
@@ -201,9 +222,11 @@ const products: Product[] = [
     category: 'Tea',
   },
   {
+    id: 8,
     slug: 'rr-strawberry-tea',
     name: 'RR Strawberry Tea',
     price: 60.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Strawberry', 'Full Cream Milk Powder', 'Sugar', 'Soluble Tea'],
     cups: 50,
     weight: '1KG',
@@ -226,10 +249,12 @@ const products: Product[] = [
     category: 'Tea',
   },
   {
+    id: 9,
     slug: 'cinnamon-tea',
     name: 'Cinnamon Tea',
     price: 62.0,
     oldPrice: 70.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Cinnamon Powder', 'Full Cream Milk Powder', 'Sugar', 'Soluble Tea'],
     cups: 50,
     weight: '1KG',
@@ -254,10 +279,12 @@ const products: Product[] = [
 
   // Lemongrass Tea
   {
+    id: 10,
     slug: 'lemongrass-tea',
     name: 'Lemongrass Tea',
     price: 60.0,
     oldPrice: 68.0,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
     ingredients: ['Lemongrass Extract', 'Full Cream Milk Powder', 'Sugar', 'Soluble Tea'],
     cups: 50,
     weight: '1KG',
@@ -280,14 +307,106 @@ const products: Product[] = [
     category: 'Tea',
   },
 
+  {
+    id: 11,
+    slug: '2-canister-vending',
+    name: '2 Canisters Vending Machine',
+    price: 1500.00,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
+    images: ['/images/RR-food-singlep5+.jpg'],
+    descImage: '/images/RR-food-singflep.jpg',
+    description: `Reliable and efficient 2-canister vending machine for hot beverages.`,
+    category: 'Machine',
+    specs: [
+      { key: 'Canisters', value: '2' },
+      { key: 'Power Consumption', value: '1.2kW' },
+      { key: 'Output', value: 'Up to 100 cups/hour' },
+      { key: 'Dimension', value: '450 x 600 x 700mm' },
+    ],
+  },
+  {
+    id: 12,
+    slug: '3-canister-vending',
+    name: '3 Canisters Vending Machine',
+    price: 1800.00,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
+    images: ['/images/RR-food-singlep5+.jpg'],
+    descImage: '/images/RR-food-singflep.jpg',
+    description: `Serve three beverage options with this compact machine.`,
+    category: 'Machine',
+    specs: [
+      { key: 'Canisters', value: '3' },
+      { key: 'Power Consumption', value: '1.5kW' },
+      { key: 'Output', value: '120 cups/hour' },
+      { key: 'Dimension', value: '480 x 640 x 720mm' },
+    ],
+  },
+  {
+    id: 13,
+    slug: '4-canister-vending',
+    name: '4 Canisters Vending Machine',
+    price: 2000.00,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
+    images: ['/images/RR-food-singlep5+.jpg'],
+    descImage: '/images/RR-food-singflep.jpg',
+    description: `Premium 4-canister machine for a full range of hot drinks.`,
+    category: 'Machine',
+    specs: [
+      { key: 'Canisters', value: '4' },
+      { key: 'Power Consumption', value: '1.8kW' },
+      { key: 'Output', value: '150 cups/hour' },
+      { key: 'Dimension', value: '500 x 700 x 800mm' },
+    ],
+  },
+  {
+    id: 14,
+    slug: '2-canister-juice',
+    name: '2 Canisters Juice Machine',
+    price: 2200.00,
+    videoUrl: 'https://www.youtube.com/embed/fuPX8mjeb-E',
+    images: ['/images/RR-food-singlep5+.jpg'],
+    descImage: '/images/RR-food-singflep.jpg',
+    description: `Chilled juice dispenser with 2 transparent tanks.`,
+    category: 'Machine',
+    specs: [
+      { key: 'Canisters', value: '2' },
+      { key: 'Capacity', value: '10L x 2' },
+      { key: 'Cooling', value: 'Compressor-based' },
+      { key: 'Power', value: '350W' },
+    ],
+  },
+  {
+    id: 15,
+    slug: '3-canister-juice',
+    name: '3 Canisters Juice Machine',
+    price: 2500.00,
+    videoUrl: 'https://www.youtube.com/embed/OQIdxHhdWio',
+    images: ['/images/RR-food-singlep5+.jpg'],
+    descImage: '/images/RR-food-singflep.jpg',
+    description: `Serve 3 flavors at once with this efficient juice dispenser.`,
+    category: 'Machine',
+    specs: [
+      { key: 'Canisters', value: '3' },
+      { key: 'Capacity', value: '10L x 3' },
+      { key: 'Cooling', value: 'Compressor-based' },
+      { key: 'Power', value: '400W' },
+    ],
+  },
+  
+
 ];
 
 
-
-export function getAllProducts(): Product[] {
-  return products;
+export async function getAllProducts(): Promise<Product[]> {
+  return products; // Still sync, but declared async
 }
 
-export function getProductBySlug(slug: string): Product | undefined {
+export async function getProductBySlug(slug: string): Promise<Product | undefined> {
   return products.find((p) => p.slug === slug);
+}
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((product) => ({ slug: product.slug }));
 }

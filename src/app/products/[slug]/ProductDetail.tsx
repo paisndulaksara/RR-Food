@@ -5,6 +5,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
 import { Product } from "@/lib/products";
+import { useCart } from "@/context/CartContext";
 
 interface ProductDetailProps {
   product: Product;
@@ -12,6 +13,7 @@ interface ProductDetailProps {
 
 export default function ProductDetail({ product }: ProductDetailProps) {
   const {
+    id,
     name: productName,
     price: productPrice,
     oldPrice: productOldPrice,
@@ -26,19 +28,28 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useCart();
+
   const incrementQty = () => setQuantity((q) => q + 1);
   const decrementQty = () => setQuantity((q) => (q > 1 ? q - 1 : 1));
-  const handleAddToCart = () =>
-    console.log(`Added ${quantity} of ${productName} to cart`);
-  
+
+  const handleAddToCart = () => {
+    addToCart({
+      id: id.toString(),
+      name: productName,
+      price: productPrice,
+      image: productImages[0],
+      quantity,
+    });
+  };
+
   const handleBuyNow = () => {
-    const message = `Hi, I'm interested in buying ${quantity} of "${productName}". Please provide the details.`;
-    const encodedMessage = encodeURIComponent(message);
-    const phone = "+94770562303"; // Your WhatsApp number without `+` or spaces
-    const whatsappURL = `https://wa.me/${phone}?text=${encodedMessage}`;
+    const message = `Hi, I'm interested in buying ${quantity} of \"${productName}\".`;
+    const whatsappURL = `https://wa.me/+94770562303?text=${encodeURIComponent(
+      message
+    )}`;
     window.open(whatsappURL, "_blank");
   };
-  
 
   const relatedProducts = [
     { name: "RR Cafe", image: "/images/prod.png" },
@@ -49,7 +60,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
 
   return (
     <main className="bg-white dark:bg-black text-black dark:text-white">
-      {/* Breadcrumb */}
       <div className="container mx-auto px-4 py-4 text-sm text-gray-500 dark:text-white">
         Home &gt;{" "}
         <span className="text-gray-700 font-medium dark:text-gray-200">
@@ -57,9 +67,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </span>
       </div>
 
-      {/* Main 2-Column Layout */}
       <section className="container mx-auto px-4 pb-8 grid grid-cols-1 md:grid-cols-2 gap-8">
-        {/* LEFT: Swiper Slider */}
         <div>
           <Swiper
             modules={[Navigation, Pagination, Thumbs]}
@@ -70,67 +78,65 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           >
             {productImages.map((img, idx) => (
               <SwiperSlide key={idx}>
-                <div className="rounded">
-                  <Image
-                    src={img}
-                    alt={`${productName} - slide ${idx}`}
-                    width={600}
-                    height={600}
-                    className="object-contain w-full h-auto"
+                <Image
+                  src={img}
+                  alt={`${productName} - slide ${idx}`}
+                  width={600}
+                  height={600}
+                  className="object-contain w-full h-auto rounded"
+                />
+              </SwiperSlide>
+            ))}
+
+            {/* ✅ Conditionally render video if available */}
+            {product.videoUrl && (
+              <SwiperSlide>
+                <div className="relative w-full h-64 md:h-96 rounded overflow-hidden">
+                  <iframe
+                    className="w-full h-full"
+                    src={product.videoUrl}
+                    title="Product Video"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
                   />
                 </div>
               </SwiperSlide>
-            ))}
+            )}
           </Swiper>
 
           <Swiper
             modules={[Thumbs]}
             watchSlidesProgress
             onSwiper={setThumbsSwiper}
-            slidesPerView={3}
+            slidesPerView={4}
             spaceBetween={10}
             className="mb-4"
           >
             {productImages.map((img, idx) => (
               <SwiperSlide key={idx}>
-                <div className="rounded">
-                  <Image
-                    src={img}
-                    alt={`Thumbnail ${idx}`}
-                    width={60}
-                    height={60}
-                    className="object-contain w-full h-auto"
-                  />
-                </div>
+                <Image
+                  src={img}
+                  alt={`Thumbnail ${idx}`}
+                  width={60}
+                  height={60}
+                  className="object-contain w-full h-auto rounded"
+                />
               </SwiperSlide>
             ))}
           </Swiper>
         </div>
 
-        {/* RIGHT: Buy Section */}
         <div className="space-y-6 px-4">
           <h1 className="text-4xl font-extrabold">{productName}</h1>
-          <div className="flex items-center gap-2">
-            <div className="flex text-[#c9a566]">
-              {"★★★★★".split("").map((star, i) => (
-                <span key={i} className="text-2xl tracking-wide">
-                  {star}
-                </span>
-              ))}
-            </div>
-            <span className="text-sm text-gray-500 dark:text-white">
-              (0 reviews)
-            </span>
-          </div>
-
           <div className="flex items-baseline gap-4">
             <span className="text-3xl font-bold text-[#c9a566]">
-              ${productPrice.toFixed(2)}
+              Rs.{productPrice.toFixed(2)}
             </span>
             {productOldPrice && (
               <>
                 <span className="text-lg line-through text-white dark:text-gray-500">
-                  ${productOldPrice.toFixed(2)}
+                  Rs.{productOldPrice.toFixed(2)}
                 </span>
                 <span className="text-xs font-semibold uppercase bg-red-500 text-white px-2 py-1 rounded-full animate-pulse">
                   Sale
@@ -139,17 +145,23 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             )}
           </div>
 
-          {/* Short Description */}
           <div className="text-sm text-gray-600 dark:text-white space-y-2">
-            <p>
-              <strong>Ingredients:</strong> {ingredients.join(", ")}.
-            </p>
-            <p>
-              <strong>Serves:</strong> up to {cups} cups.
-            </p>
-            <p>
-              <strong>Net Weight:</strong> {weight}
-            </p>
+            {ingredients && ingredients.length > 0 && (
+              <p>
+                <strong>Ingredients:</strong> {ingredients.join(", ")}.
+              </p>
+            )}
+            {cups && (
+              <p>
+                <strong>Serves:</strong> up to {cups} cups.
+              </p>
+            )}
+            {weight && (
+              <p>
+                <strong>Net Weight:</strong> {weight}
+              </p>
+            )}
+
             <div className="mt-4">
               <Image
                 src="/images/certificate.jpg"
@@ -161,7 +173,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             </div>
           </div>
 
-          {/* Quantity + Buttons */}
           <div className="flex items-center gap-4">
             <div className="flex items-center border border-gray-300 dark:border-gray-700 rounded-lg overflow-hidden">
               <button onClick={decrementQty} className="px-4 py-2 text-xl">
@@ -187,14 +198,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             BUY IT NOW
           </button>
 
-          <div className="text-sm text-gray-600 dark:text-white space-y-1">
-            {/* <p>Free shipping over $50</p>
-            <p>Estimated delivery: 12–26 days (Intl), 3–6 days (US)</p>
-            <p>Return within 45 days. Duties & taxes non-refundable.</p> */}
-            <p className="text-gray-600 dark:text-white leading-relaxed">
-              {description}
-            </p>
-          </div>
+          <p className="text-sm text-gray-600 dark:text-white leading-relaxed">
+            {description}
+          </p>
         </div>
       </section>
 
@@ -202,31 +208,52 @@ export default function ProductDetail({ product }: ProductDetailProps) {
       <section className="container mx-auto px-4 py-8">
         <h2 className="text-xl md:text-2xl font-bold mb-6">Description</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 items-start">
-          <table className="w-full table-auto border border-gray-200 dark:border-gray-700">
-            <thead className="bg-gray-100 dark:bg-gray-800">
-              <tr>
-                <th className="border px-3 py-2 text-left">
-                  Nutritional Information
-                </th>
-                <th className="border px-3 py-2 text-left">Unit</th>
-                <th className="border px-3 py-2 text-left">Per 100g</th>
-              </tr>
-            </thead>
-            <tbody>
-              {nutrition.map((row) => (
-                <tr key={row.label}>
-                  <td className="border px-3 py-2">{row.label}</td>
-                  <td className="border px-3 py-2">{row.unit}</td>
-                  <td className="border px-3 py-2">{row.per100g}</td>
+          {nutrition && (
+            <table className="w-full table-auto border border-gray-200 dark:border-gray-700">
+              <thead className="bg-gray-100 dark:bg-gray-800">
+                <tr>
+                  <th className="border px-3 py-2 text-left">
+                    Nutritional Information
+                  </th>
+                  <th className="border px-3 py-2 text-left">Unit</th>
+                  <th className="border px-3 py-2 text-left">Per 100g</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody>
+                {nutrition.map((row) => (
+                  <tr key={row.label}>
+                    <td className="border px-3 py-2">{row.label}</td>
+                    <td className="border px-3 py-2">{row.unit}</td>
+                    <td className="border px-3 py-2">{row.per100g}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
+
+          {product.specs && (
+            <table className="w-full table-auto border border-gray-200 dark:border-gray-700">
+              <thead className="bg-gray-100 dark:bg-gray-800">
+                <tr>
+                  <th className="border px-3 py-2 text-left">Specification</th>
+                  <th className="border px-3 py-2 text-left">Value</th>
+                </tr>
+              </thead>
+              <tbody>
+                {product.specs.map((row) => (
+                  <tr key={row.key}>
+                    <td className="border px-3 py-2">{row.key}</td>
+                    <td className="border px-3 py-2">{row.value}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          )}
 
           <div className="overflow-hidden rounded shadow-sm">
             <Image
               src={descImage}
-              alt={`${productName} detail`}
+              alt={`Rs.{productName} detail`}
               width={600}
               height={400}
               className="object-cover w-full h-full"
@@ -239,7 +266,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </p>
       </section>
 
-      {/* You Might Also Like */}
       <section className="container mx-auto px-4 py-8">
         <h2 className="text-xl md:text-2xl font-bold mb-6">
           You Might Also Like

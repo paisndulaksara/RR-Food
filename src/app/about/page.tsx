@@ -14,8 +14,9 @@ export default function AboutPage() {
       <KeyFeatures />
       <VissonMission/>
      
-      <AboutCertificates/>
+      
       <AboutAwards/>
+      <AboutCertificates/>
     </main>
   );
 }

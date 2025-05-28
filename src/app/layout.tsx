@@ -1,13 +1,14 @@
 // src/app/layout.tsx
-import "./globals.css";
-import Header from "@/components/common/Header";
-import Footer from "@/components/common/Footer";
-import ContentWrapper from "@/components/common/ContentWrapper";
-import WhatsAppButton from "@/components/common/WhatsAppButton";
+import './globals.css';
+import Header from '@/components/common/Header';
+import Footer from '@/components/common/Footer';
+import ContentWrapper from '@/components/common/ContentWrapper'; 
+import Providers from './providers'; // 🟨 import this 
+import FloatingButtons from '@/components/common/FloatingButtons';
 
 export const metadata = {
-  title: "RR Foods",
-  description: "Premium Premixes and Vending Solutions",
+  title: 'RR Foods',
+  description: 'Premium Premixes and Vending Solutions',
 };
 
 export default function RootLayout({
@@ -18,11 +19,12 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body className="bg-white text-black dark:bg-black dark:text-white transition-colors duration-300">
-        <Header />
-        {/* Use the client component for conditional padding */}
-        <ContentWrapper>{children}</ContentWrapper>
-        <Footer />
-        <WhatsAppButton /> 
+        <Providers>
+          <Header />
+          <ContentWrapper>{children}</ContentWrapper>
+          <Footer />
+          <FloatingButtons />
+        </Providers>
       </body>
     </html>
   );

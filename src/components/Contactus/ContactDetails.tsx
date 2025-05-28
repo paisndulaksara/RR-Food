@@ -64,15 +64,16 @@ export default function ContactDetails() {
 
           {/* RIGHT COLUMN: Map */}
           <div className="w-full h-[400px] overflow-hidden rounded shadow-sm">
-            <iframe
-              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126820.9460995602!2d79.82432457988513!3d6.715897864469063!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3ae247924f09c991%3A0x8aa711e9fa39acc0!2s32%20Jayathilaka%20Mawatha%2C%20Panadura!5e0!3m2!1sen!2slk!4v1695298233488!5m2!1sen!2slk"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen
-              loading="lazy"
-              referrerPolicy="no-referrer-when-downgrade"
-            />
+          <iframe
+  src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d12676.405950357233!2d79.954416!3d6.736496!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2slk!4v1716838912345!5m2!1sen!2slk"
+  width="100%"
+  height="400"
+  style={{ border: 0 }}
+  allowFullScreen
+  loading="lazy"
+  referrerPolicy="no-referrer-when-downgrade"
+/>
+
           </div>
         </div>
       </div>

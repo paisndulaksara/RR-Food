@@ -1,36 +1,40 @@
-'use client';
-import { usePathname } from 'next/navigation';
-import Image from 'next/image';
-import Link from 'next/link';
-import { useState, useEffect, useRef } from 'react';
-import {
-    FiMenu, FiX, FiMoon, FiSun,
-    FiShoppingCart,
-} from 'react-icons/fi';
+"use client";
+import { usePathname } from "next/navigation";
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect, useRef } from "react";
+import { FiMenu, FiX, FiMoon, FiSun, FiShoppingCart } from "react-icons/fi";
+import { useCart } from "@/context/CartContext";
 
 const Header = () => {
   const pathname = usePathname();
-  const isHome = pathname === '/';
+  const isHome = pathname === "/";
 
+  const { cartCount,cart } = useCart();
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
   const [aboutDropdown, setAboutDropdown] = useState(false);
-  const timeoutRef = useRef<NodeJS.Timeout | null>(null);
+  const timeoutRef = useRef<NodeJS.Timeout | null>(null); 
+
+console.log("Header Cart Count:", cartCount);
+console.log("Header Cart Items:", cart);
+
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   useEffect(() => {
-    document.documentElement.classList.toggle('dark', darkMode);
+    document.documentElement.classList.toggle("dark", darkMode);
   }, [darkMode]);
- 
 
-  const textColor = isHome && !scrolled ? 'text-white' : 'text-black dark:text-white';
-  const backgroundClass = isHome && !scrolled ? 'bg-transparent' : 'bg-white dark:bg-black';
+  const textColor =
+    isHome && !scrolled ? "text-white" : "text-black dark:text-white";
+  const backgroundClass =
+    isHome && !scrolled ? "bg-transparent" : "bg-white dark:bg-black";
 
   const handleDropdownEnter = () => {
     if (timeoutRef.current) clearTimeout(timeoutRef.current);
@@ -45,7 +49,7 @@ const Header = () => {
 
   useEffect(() => {
     const storedTheme = localStorage.getItem("theme");
-  
+
     if (storedTheme === "light") {
       setDarkMode(false);
       document.documentElement.classList.remove("dark");
@@ -56,11 +60,13 @@ const Header = () => {
       localStorage.setItem("theme", "dark");
     }
   }, []);
+
   
+
   const toggleDarkMode = () => {
     const newTheme = !darkMode;
     setDarkMode(newTheme);
-  
+
     if (newTheme) {
       document.documentElement.classList.add("dark");
       localStorage.setItem("theme", "dark");
@@ -69,7 +75,6 @@ const Header = () => {
       localStorage.setItem("theme", "light");
     }
   };
-  
 
   return (
     <header className="fixed top-0 left-0 w-full z-50 transition-colors duration-300">
@@ -78,12 +83,18 @@ const Header = () => {
           {/* Mobile Menu Button */}
           <div className="lg:hidden absolute right-4 top-4 z-20">
             <button onClick={() => setMenuOpen(!menuOpen)}>
-              {menuOpen ? <FiX size={24} className={textColor} /> : <FiMenu size={24} className={textColor} />}
+              {menuOpen ? (
+                <FiX size={24} className={textColor} />
+              ) : (
+                <FiMenu size={24} className={textColor} />
+              )}
             </button>
           </div>
 
           {/* Desktop Navigation */}
-          <nav className={`hidden lg:flex gap-4 text-sm font-normal uppercase pt-2 ${textColor}`}>
+          <nav
+            className={`hidden lg:flex gap-4 text-sm font-normal uppercase pt-2 ${textColor}`}
+          >
             <Link href="/">HOME</Link>
             <span>|</span>
             <Link href="/products">PRODUCTS</Link>
@@ -97,16 +108,43 @@ const Header = () => {
             >
               <span className="hover:text-[#caa465] cursor-pointer flex items-center gap-1">
                 ABOUT RR
-                <svg className={`h-4 w-4 transition-transform ${aboutDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                <svg
+                  className={`h-4 w-4 transition-transform ${
+                    aboutDropdown ? "rotate-180" : ""
+                  }`}
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  stroke="currentColor"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M19 9l-7 7-7-7"
+                  />
                 </svg>
               </span>
 
               {aboutDropdown && (
                 <div className="absolute top-7 left-0 bg-white dark:bg-gray-800 shadow-lg rounded w-40 text-left z-50">
-                  <Link href="/about" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">About Us</Link>
-                  <Link href="/about/team" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Team</Link>
-                  <Link href="/about/innovation" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700">Innovation</Link>
+                  <Link
+                    href="/about"
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    About Us
+                  </Link>
+                  <Link
+                    href="/about/team"
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    Team
+                  </Link>
+                  <Link
+                    href="/about/innovation"
+                    className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  >
+                    Innovation
+                  </Link>
                 </div>
               )}
             </div>
@@ -120,12 +158,22 @@ const Header = () => {
           </nav>
 
           {/* Desktop Icons */}
-          <div className={`hidden lg:flex gap-6 items-center text-base pt-2 ${textColor}`}>
+          <div
+            className={`hidden lg:flex gap-6 items-center text-base pt-2 ${textColor}`}
+          >
             <Link href="/login">LOGIN</Link>
             {/* <FiSearch className="cursor-pointer text-lg" />
             <FiHeart className="cursor-pointer text-lg" />
             <FiShoppingCart className="cursor-pointer text-lg" /> */}
-            <FiShoppingCart className="cursor-pointer text-lg" /> 
+            <Link href="/cart" className="relative">
+              <FiShoppingCart className="text-lg" />
+              {cartCount > 0 && (
+                <span className="absolute -top-2 -right-2 bg-red-500 text-white rounded-full w-5 h-5 text-xs flex items-center justify-center">
+                  {cartCount}
+                </span>
+              )}
+            </Link>
+
             <button onClick={toggleDarkMode}>
               {darkMode ? <FiSun size={22} /> : <FiMoon size={22} />}
             </button>
@@ -146,32 +194,67 @@ const Header = () => {
 
         {/* Mobile Nav */}
         {menuOpen && (
-          <div className={`lg:hidden absolute top-[120px] left-0 right-0 py-4 z-40 flex flex-col items-center gap-4 uppercase text-sm border-t border-[#c9a566]/60 ${backgroundClass}`}>
-            <Link href="/" className={textColor}>HOME</Link>
-            <Link href="/products" className={textColor}>PRODUCTS</Link>
+          <div
+            className={`lg:hidden absolute top-[120px] left-0 right-0 py-4 z-40 flex flex-col items-center gap-4 uppercase text-sm border-t border-[#c9a566]/60 ${backgroundClass}`}
+          >
+            <Link href="/" className={textColor}>
+              HOME
+            </Link>
+            <Link href="/products" className={textColor}>
+              PRODUCTS
+            </Link>
 
             {/* Mobile Dropdown */}
-            <button onClick={() => setAboutDropdown(prev => !prev)} className={`flex items-center gap-1 ${textColor}`}>
+            <button
+              onClick={() => setAboutDropdown((prev) => !prev)}
+              className={`flex items-center gap-1 ${textColor}`}
+            >
               ABOUT RR
-              <svg className={`h-4 w-4 transition-transform ${aboutDropdown ? 'rotate-180' : ''}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+              <svg
+                className={`h-4 w-4 transition-transform ${
+                  aboutDropdown ? "rotate-180" : ""
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M19 9l-7 7-7-7"
+                />
               </svg>
             </button>
 
             {aboutDropdown && (
               <div className="flex flex-col items-center gap-2 -mt-2">
-                <Link href="/about" className={textColor}>About Us</Link>
-                <Link href="/about/team" className={textColor}>Team</Link>
-                <Link href="/about/innovation" className={textColor}>Innovation</Link>
+                <Link href="/about" className={textColor}>
+                  About Us
+                </Link>
+                <Link href="/about/team" className={textColor}>
+                  Team
+                </Link>
+                <Link href="/about/innovation" className={textColor}>
+                  Innovation
+                </Link>
               </div>
             )}
 
-            <Link href="/csr" className={textColor}>CSR</Link>
-            <Link href="/gallery" className={textColor}>GALLERY</Link>
-            <Link href="/contactus" className={textColor}>CONTACT</Link>
-            <Link href="/login" className={textColor}>LOGIN</Link>
+            <Link href="/csr" className={textColor}>
+              CSR
+            </Link>
+            <Link href="/gallery" className={textColor}>
+              GALLERY
+            </Link>
+            <Link href="/contactus" className={textColor}>
+              CONTACT
+            </Link>
+            <Link href="/login" className={textColor}>
+              LOGIN
+            </Link>
             <button onClick={toggleDarkMode} className={textColor}>
-              {darkMode ? 'Light Mode' : 'Dark Mode'}
+              {darkMode ? "Light Mode" : "Dark Mode"}
             </button>
           </div>
         )}

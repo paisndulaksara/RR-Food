@@ -19,14 +19,14 @@ const premixes = [
 ];
 
 const coffeeMachines = [
-  { name: '2 Canisters Vending Machine', image: '/images/two-canister.png', slug: '2-canisters-machine' },
-  { name: '3 Canisters Vending Machine', image: '/images/three-canister.png', slug: '3-canisters-machine' },
-  { name: '4 Canisters Vending Machine', image: '/images/four-cansiter.png', slug: '4-canisters-machine' },
+  { name: '2 Canisters Vending Machine', image: '/images/two-canister.png', slug: '2-canister-vending' },
+  { name: '3 Canisters Vending Machine', image: '/images/three-canister.png', slug: '3-canister-vending' },
+  { name: '4 Canisters Vending Machine', image: '/images/four-cansiter.png', slug: '4-canister-vending' },
 ];
 
 const juiceMachines = [
-  { name: '2 Canisters Vending Machine', image: '/images/fruit-two-canisters.png', slug: '2-canisters-juice' },
-  { name: '3 Canisters Vending Machine', image: '/images/fruit-three-canister.png', slug: '3-canisters-juice' },
+  { name: '2 Canisters Vending Machine', image: '/images/fruit-two-canisters.png', slug: '2-canister-juice' },
+  { name: '3 Canisters Vending Machine', image: '/images/fruit-three-canister.png', slug: '3-canister-juice' },
 ];
 
 // Merged vending category => coffee + juice
@@ -99,7 +99,7 @@ export default function ProductSection() {
                       : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
                   }`}
                 >
-                  Vending Machines
+                    Machines
                 </button>
 
                 {/* Sub-categories (indented) */}

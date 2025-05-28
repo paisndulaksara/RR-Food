@@ -15,6 +15,7 @@ export default function ContentWrapper({
   // Add other routes that NEED top padding (if any)
   const applyPaddingPages: string[] = [
     // e.g., "/custom-page" (only if it has no banner)
+    "/cart",
   ];
 
   const shouldApplyPadding =

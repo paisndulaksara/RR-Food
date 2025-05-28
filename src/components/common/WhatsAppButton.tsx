@@ -1,15 +1,17 @@
-'use client';
-import { FaWhatsapp } from 'react-icons/fa';
+// src/components/common/WhatsAppButton.tsx
+"use client";
+import Link from "next/link";
+import { FaWhatsapp } from "react-icons/fa";
 
 export default function WhatsAppButton() {
   return (
-    <a
-      href="https://wa.me/+94770562303" // <-- replace with your number (without +, use 94 for Sri Lanka)
+    <Link
+      href="https://wa.me/94770562303"
       target="_blank"
-      rel="noopener noreferrer"
-      className="fixed bottom-6 right-6 z-50 bg-green-500 hover:bg-green-600 text-white rounded-full p-4 shadow-lg transition duration-300"
+      className="w-14 h-14 bg-green-500 rounded-full shadow-lg flex items-center justify-center hover:scale-105 transition"
+      aria-label="WhatsApp"
     >
-      <FaWhatsapp size={28} />
-    </a>
+      <FaWhatsapp size={28} className="text-white" />
+    </Link>
   );
 }

@@ -15,7 +15,7 @@ const teamRows: TeamMember[][] = [
     {
       name: "Mr. R.P. Jayasinghe",
       role: "Chairman, RR Foods Lanka (PVT) Ltd",
-      image: "/images/person-1.webp",
+      image: "/images/RPJayasinghe.jpg",
       message: `It is a great pleasure for me to considerRR Foods Lanka (PVT)
                 Ltd.'s journey. This dynamic and innovative food product
                 company started in 2012 as a small coffee machine rental
@@ -36,7 +36,7 @@ const teamRows: TeamMember[][] = [
     {
       name: "Ms. C.P.S. Roshini Fernando",
       role: "Managing Director",
-      image: "/images/person-2.webp",
+      image: "/images/RoshiniFernando.jpg",
       message: `The esteemed Managing Director of our organization,
                 Ms. C.P.S. Roshini Fernando has been a great
                 supporter of strength and strategic brilliance, which
@@ -58,24 +58,24 @@ const teamRows: TeamMember[][] = [
     {
       name: "Mrs. Milakshi Fernando",
       role: "Finance Manager",
-      image: "/images/person-1.webp",
+      image: "/images/milakshi.jpg",
     },
     {
       name: "Mr. Sujith Nishintha",
       role: "Sales Manager",
-      image: "/images/person-2.webp",
+      image: "/images/sujith.jpg",
     },
   ],
   [
     {
       name: "Mrs. R. Prasangi Jayasingha",
       role: "HR Manager",
-      image: "/images/person-3.webp",
+      image: "/images/prasangi.jpg",
     },
     {
       name: "Mrs. Asitha Nilmini",
       role: "Factory Manager",
-      image: "/images/person-1.webp",
+      image: "/images/nilmini.jpg",
     },
     {
       name: "Mr. Dashanka Sohan",
