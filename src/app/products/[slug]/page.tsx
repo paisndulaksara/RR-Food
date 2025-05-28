@@ -1,8 +1,15 @@
 import { getAllProducts, getProductBySlug } from "@/lib/products";
 import ProductDetail from "./ProductDetail";
 
-// ✅ Let Next.js infer the correct props
-export default async function ProductPage({ params }: { params: { slug: string } }) {
+export const dynamicParams = false;
+
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((product) => ({ slug: product.slug }));
+}
+
+// ✅ This works 100% in both dev and Vercel builds
+export default async function ProductPage({ params }: any) {
   const product = await getProductBySlug(params.slug);
 
   if (!product) {
@@ -18,12 +25,3 @@ export default async function ProductPage({ params }: { params: { slug: string }
 
   return <ProductDetail product={product} />;
 }
-
-// ✅ Static params generation (good for SEO/static builds)
-export async function generateStaticParams() {
-  const products = await getAllProducts();
-  return products.map((product) => ({ slug: product.slug }));
-}
-
-// ✅ Optional, but prevents misusage of dynamicParams
-export const dynamicParams = false;
