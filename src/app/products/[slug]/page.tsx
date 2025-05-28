@@ -1,20 +1,8 @@
 import { getAllProducts, getProductBySlug } from "@/lib/products";
 import ProductDetail from "./ProductDetail";
 
-interface ProductPageProps {
-  params: {
-    slug: string;
-  };
-}
-
-export const dynamicParams = false;
-
-export async function generateStaticParams() {
-  const products = await getAllProducts();
-  return products.map((product) => ({ slug: product.slug }));
-}
-
-export default async function ProductPage({ params }: ProductPageProps) {
+// ✅ Let Next.js infer the correct props
+export default async function ProductPage({ params }: { params: { slug: string } }) {
   const product = await getProductBySlug(params.slug);
 
   if (!product) {
@@ -30,3 +18,12 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
   return <ProductDetail product={product} />;
 }
+
+// ✅ Static params generation (good for SEO/static builds)
+export async function generateStaticParams() {
+  const products = await getAllProducts();
+  return products.map((product) => ({ slug: product.slug }));
+}
+
+// ✅ Optional, but prevents misusage of dynamicParams
+export const dynamicParams = false;
