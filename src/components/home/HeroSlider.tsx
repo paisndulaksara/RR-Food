@@ -18,7 +18,7 @@ const slides = [
   {
     id: 2,
     image: "/images/02.jpg",
-    mobileImage: "/images/02mobile.png",
+    mobileImage: "/images/02mobile.jpg",
     title: "Pressed for Freshness,<br/> Served in Seconds",
     subtitle: "RR Cafe",
     description:
@@ -27,7 +27,7 @@ const slides = [
   {
     id: 3,
     image: "/images/03.jpg",
-    mobileImage: "/images/03mobile.png",
+    mobileImage: "/images/03mobile.jpg",
     title: "From Beans to Bliss",
     subtitle: "Authentic Flavor",
     description: "Indulge in the Richness of RR",
