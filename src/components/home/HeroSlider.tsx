@@ -9,7 +9,7 @@ const slides = [
   {
     id: 1,
     image: "/images/01.jpg",
-    mobileImage: "/images/01mobile.png",
+    mobileImage: "/images/01mobile.jpg",
     title: "Brewed Fresh,<br/>Served Fast",
     subtitle: "RR CAFE",
     description:
