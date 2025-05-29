@@ -22,12 +22,18 @@ const coffeeMachines = [
   { name: '2 Canisters Vending Machine', image: '/images/two-canister.png', slug: '2-canister-vending' },
   { name: '3 Canisters Vending Machine', image: '/images/three-canister.png', slug: '3-canister-vending' },
   { name: '4 Canisters Vending Machine', image: '/images/four-cansiter.png', slug: '4-canister-vending' },
+  { name: 'RR Special Machine',image: '/images/Special-Machine.png',slug: 'rr-special-machine',},
+  { name: 'RR Athlantic Machine',image: '/images/Athlantic.png',slug: 'rr-athlantic-machine',},
 ];
 
 const juiceMachines = [
   { name: '2 Canisters Vending Machine', image: '/images/fruit-two-canisters.png', slug: '2-canister-juice' },
   { name: '3 Canisters Vending Machine', image: '/images/fruit-three-canister.png', slug: '3-canister-juice' },
+  { name: '2 Canisters Juice Machine', image: '/images/machin-01.png', slug: '2-canister-juice-nice' },
+  { name: '1 Canisters Juice Machine', image: '/images/machin-02.png', slug: '1-canister-juice' },
+  { name: 'Juice Machine Dispencer', image: '/images/Juice-Machine-Dispenser.png', slug: 'juice-machine-dispnecer' },
 ];
+
 
 // Merged vending category => coffee + juice
 const vendingAll = [...coffeeMachines, ...juiceMachines];

@@ -1,5 +1,6 @@
 'use client';
 import { useState } from 'react';
+import Image from 'next/image';
 
 export default function ContactForm() {
   const [formData, setFormData] = useState({
@@ -22,7 +23,30 @@ export default function ContactForm() {
   };
 
   return (
-    <section className="py-20 bg-white dark:bg-black transition-colors duration-300">
+    <section className="relative py-20   transition-colors duration-300">
+      {/* Background Images */}
+      <div className="absolute inset-0 -z-10">
+        {/* Desktop background */}
+        <div className="hidden sm:block w-full h-full">
+          <Image
+            src="/images/contact-us.jpg"
+            alt="Contact background desktop"
+            fill
+            className="object-cover"
+          />
+        </div>
+
+        {/* Mobile background */}
+        <div className="block sm:hidden w-full h-full">
+          <Image
+            src="/images/contact-us-mobile.jpg"
+            alt="Contact background mobile"
+            fill
+            className="object-cover"
+          />
+        </div>
+      </div>
+
       <div className="container mx-auto px-4">
         <h2 className="text-center text-3xl font-extrabold text-black dark:text-white mb-10 tracking-wide">
           Contact Us
