@@ -9,7 +9,6 @@ interface TeamMember {
   message?: string; // ✅ Mark as optional
 }
 
-
 const teamRows: TeamMember[][] = [
   [
     {
@@ -146,41 +145,40 @@ export default function OurTeam() {
 
       {/* Modal Popup */}
       {/* Modal Popup */}
-{modalMessage && (
-  <div
-    className="fixed inset-0 backdrop-blur-sm bg-white/30 z-50 flex items-center justify-center px-4"
-    onClick={() => setModalMessage(null)}
-  >
-    <div
-      className="bg-white dark:bg-[#c9a566] p-6 max-w-xl w-full rounded-lg shadow-xl relative"
-      onClick={(e) => e.stopPropagation()}
-    >
-      <button
-        className="absolute top-2 right-4 text-2xl font-bold text-gray-400 hover:text-black dark:hover:text-white"
-        onClick={() => setModalMessage(null)}
-      >
-        &times;
-      </button>
-      <p className="text-gray-800 dark:text-white whitespace-pre-line mb-6">
-        {modalMessage}
-      </p>
-      {/* Find who the message belongs to */}
-      {teamRows.flat().map((member) =>
-        member.message === modalMessage ? (
-          <div key={member.name} className="text-right">
-            <h4 className="text-lg font-semibold dark:text-white">
-              {member.name}
-            </h4>
-            <p className="text-sm text-gray-600 dark:text-gray-300">
-              {member.role}
+      {modalMessage && (
+        <div
+          className="fixed inset-0 backdrop-blur-sm bg-white/30 z-50 flex items-center justify-center px-4"
+          onClick={() => setModalMessage(null)}
+        >
+          <div
+            className="bg-white dark:bg-[#c9a566] p-6 max-w-xl w-full rounded-lg shadow-xl relative"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-2 right-4 text-2xl font-bold text-gray-400 hover:text-black dark:hover:text-white"
+              onClick={() => setModalMessage(null)}
+            >
+              &times;
+            </button>
+            <p className="text-gray-800 dark:text-white   mb-6  text-base sm:text-lg mobile-text-adjust">
+              {modalMessage}
             </p>
+            {/* Find who the message belongs to */}
+            {teamRows.flat().map((member) =>
+              member.message === modalMessage ? (
+                <div key={member.name} className="text-right">
+                  <h4 className="text-lg font-semibold dark:text-white">
+                    {member.name}
+                  </h4>
+                  <p className="text-sm text-gray-600 dark:text-gray-300">
+                    {member.role}
+                  </p>
+                </div>
+              ) : null
+            )}
           </div>
-        ) : null
+        </div>
       )}
-    </div>
-  </div>
-)}
-
     </section>
   );
 }

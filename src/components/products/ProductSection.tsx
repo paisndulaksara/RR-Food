@@ -69,75 +69,103 @@ export default function ProductSection() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
 
           {/* LEFT SIDEBAR (Filter) */}
-          <aside className="bg-gray-50 dark:bg-[#121212] p-4 rounded shadow space-y-4">
-            <h2 className="text-xl font-bold mb-2 text-black dark:text-white">Categories</h2>
-            <ul className="space-y-2">
-              <li>
-                <button
-                  onClick={() => setActiveCategory('all')}
-                  className={`block w-full text-left px-3 py-2 rounded transition ${
-                    activeCategory === 'all'
-                      ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                      : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
-                  }`}
-                >
-                  All
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => setActiveCategory('premixes')}
-                  className={`block w-full text-left px-3 py-2 rounded transition ${
-                    activeCategory === 'premixes'
-                      ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                      : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
-                  }`}
-                >
-                  Premixes
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => setActiveCategory('vending')}
-                  className={`block w-full text-left px-3 py-2 rounded transition ${
-                    activeCategory === 'vending'
-                      ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                      : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
-                  }`}
-                >
-                    Machines
-                </button>
+         {/* MOBILE CATEGORY TABS */}
+<div className="block md:hidden mb-6">
+  <div className="flex gap-4 justify-center">
+    <button
+      onClick={() => setActiveCategory('premixes')}
+      className={`px-4 py-2 rounded-full text-sm font-medium border ${
+        activeCategory === 'premixes'
+          ? 'bg-[#caa465] text-white border-[#caa465]'
+          : 'border-gray-300 text-gray-700 dark:text-white'
+      }`}
+    >
+      Premixes
+    </button>
+    <button
+      onClick={() => setActiveCategory('vending')}
+      className={`px-4 py-2 rounded-full text-sm font-medium border ${
+        activeCategory === 'vending'
+          ? 'bg-[#caa465] text-white border-[#caa465]'
+          : 'border-gray-300 text-gray-700 dark:text-white'
+      }`}
+    >
+      Machines
+    </button>
+  </div>
+</div>
 
-                {/* Sub-categories (indented) */}
-                <ul className="ml-4 mt-1 space-y-1">
-                  <li>
-                    <button
-                      onClick={() => setActiveCategory('coffee')}
-                      className={`block w-full text-left px-3 py-2 rounded transition ${
-                        activeCategory === 'coffee'
-                          ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                          : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
-                      }`}
-                    >
-                      Coffee Machines
-                    </button>
-                  </li>
-                  <li>
-                    <button
-                      onClick={() => setActiveCategory('juice')}
-                      className={`block w-full text-left px-3 py-2 rounded transition ${
-                        activeCategory === 'juice'
-                          ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
-                          : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
-                      }`}
-                    >
-                      Juice Machines
-                    </button>
-                  </li>
-                </ul>
-              </li>
-            </ul>
-          </aside>
+{/* DESKTOP SIDEBAR */}
+<aside className="hidden md:block bg-gray-50 dark:bg-[#121212] p-4 rounded shadow space-y-4">
+  <h2 className="text-xl font-bold mb-2 text-black dark:text-white">Categories</h2>
+  <ul className="space-y-2">
+    <li>
+      <button
+        onClick={() => setActiveCategory('all')}
+        className={`block w-full text-left px-3 py-2 rounded transition ${
+          activeCategory === 'all'
+            ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+            : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
+        }`}
+      >
+        All
+      </button>
+    </li>
+    <li>
+      <button
+        onClick={() => setActiveCategory('premixes')}
+        className={`block w-full text-left px-3 py-2 rounded transition ${
+          activeCategory === 'premixes'
+            ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+            : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
+        }`}
+      >
+        Premixes
+      </button>
+    </li>
+    <li>
+      <button
+        onClick={() => setActiveCategory('vending')}
+        className={`block w-full text-left px-3 py-2 rounded transition ${
+          activeCategory === 'vending'
+            ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+            : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
+        }`}
+      >
+        Machines
+      </button>
+
+      {/* Sub-categories (indented) */}
+      <ul className="ml-4 mt-1 space-y-1">
+        <li>
+          <button
+            onClick={() => setActiveCategory('coffee')}
+            className={`block w-full text-left px-3 py-2 rounded transition ${
+              activeCategory === 'coffee'
+                ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+                : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
+            }`}
+          >
+            Coffee Machines
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => setActiveCategory('juice')}
+            className={`block w-full text-left px-3 py-2 rounded transition ${
+              activeCategory === 'juice'
+                ? 'bg-gray-200 dark:bg-gray-700 font-semibold'
+                : 'hover:bg-gray-100 dark:hover:bg-[#222222]'
+            }`}
+          >
+            Juice Machines
+          </button>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</aside>
+
 
           {/* RIGHT CONTENT: Products */}
           <div className="md:col-span-3">
