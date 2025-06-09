@@ -3,16 +3,17 @@ export interface Product {
   name: string;
   slug: string;
   price: string; // comes as string, parseFloat in UI
-  discount_price: string | null;
-  category_id: number;
+  discount_price?: string | null;
+  category_id?: number;
   ingredients?: string | null;
   serves?: number | null;
+  
   net_weight?: string | null;
   certificate_image_url?: string;
   description: string;
   product_description_image_url?: string;
-  product_image_url: string;
-  feature_image_url: string;
+  product_image_url?: string;
+  feature_image_url?: string;
   video_link?: string | null;
   type: "nutrition" | "specs";
   type_relation: Nutrition[] | Specification[]; // for table
