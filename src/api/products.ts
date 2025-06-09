@@ -4,7 +4,7 @@ export interface Product {
   slug: string;
   price: string; // comes as string, parseFloat in UI
   discount_price?: string | null;
-  category_id?: number;
+  category_id: number;
   ingredients?: string | null;
   serves?: number | null;
   
@@ -75,21 +75,16 @@ export async function getAllProducts(): Promise<ProductData> {
   return json.data;
 }
 
-export async function getProductBySlug(
-  slug: string
-): Promise<{ product: Product } | null> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/user/product/${slug}`,
-    {
-      cache: "no-store",
-    }
-  );
+  // ✅ Good version
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE_URL}/user/product/${slug}`, {
+    cache: "no-store",
+  });
 
   if (!res.ok) {
-    console.error(`❌ Failed to fetch product by slug: ${slug}`);
     return null;
   }
 
   const json = await res.json();
-  return json.data;
+  return json.data.product; // ✅ returns only the product
 }
