@@ -1,14 +1,12 @@
-import { getProductBySlug, Product } from "@/api/products";
+// src/app/products/[slug]/ProductPage.tsx
+import { getProductBySlug, Product } from "@/api/products"; // ✅ Ensure Product is imported from here
 import ProductDetail from "./ProductDetail";
 
 export default async function ProductPage({ params }: Props) {
-  // First await the params object
   const paramsValue = await params;
-  
-  // Then destructure slug from the awaited value
   const { slug } = paramsValue;
-  
   const product: Product | null = await getProductBySlug(slug);
+
   if (!product) {
     throw new Error("Product not found");
   }
@@ -16,7 +14,5 @@ export default async function ProductPage({ params }: Props) {
 }
 
 interface Props {
-  params: Promise<{ slug: string }>; // ✅ Promise is now here
+  params: Promise<{ slug: string }>;
 }
-
-// Rest of your interfaces remain unchanged...
