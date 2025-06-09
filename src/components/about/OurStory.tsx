@@ -1,125 +1,61 @@
-"use client";
-import Image from "next/image";
+'use client';
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { getAboutData } from '@/api/about';
 
-const OurStory = () => {
+// Define the story type
+interface Story {
+  id: number;
+  title: string;
+  description: string;
+  image: string;
+  image_url: string;
+}
+
+export default function OurStory() {
+  const [stories, setStories] = useState<Story[]>([]);
+
+  useEffect(() => {
+    getAboutData().then((data) => setStories(data.our_story || []));
+  }, []);
+
   return (
     <section className="pb-16 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
-        {/* Section Title */}
         <h2 className="text-3xl md:text-4xl font-bold mb-10 text-center text-black dark:text-white">
           Our Story
         </h2>
 
-        {/* Block 1 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
-          <div>
-            <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
-              RR Foods Lanka (PVT) Ltd started in 2012 by renting out coffee
-              machines. Since then, the company has developed significantly. Mr.
-              R.P. Jayasinghe’s vision and entrepreneurial spirit contributed to
-              establishing RR Foods Lanka (PVT) Ltd. With the support of Ms.
-              C.P.S. Roshini Fernando, the company expanded from renting out
-              equipment to importing and reselling coffee machines, and later
-              producing and distributing revolutionary milk powder blends like
-              RR Café and RR Tea.
-            </p>
-          </div>
-          <div>
-            <Image
-              src="/images/factory02.jpg"
-              alt="RR Foods History"
-              width={600}
-              height={400}
-              className="rounded-xl shadow-lg w-full h-auto object-cover"
-            />
-          </div>
-        </div>
+        {stories.map((story, index) => (
+          <div
+            key={story.id}
+            className={`flex flex-col md:flex-row gap-10 items-center mb-16 ${
+              index % 2 === 1 ? 'md:flex-row-reverse' : ''
+            }`}
+          >
+            {/* Text Section */}
+            <div className="md:w-1/2">
+              <h3 className="text-2xl font-semibold mb-2 text-black dark:text-white">
+                {story.title}
+              </h3>
+              <p className="text-gray-700 dark:text-gray-200 leading-relaxed whitespace-pre-line">
+                {story.description}
+              </p>
+            </div>
 
-        {/* Block 2 */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
-          <div className="order-2 md:order-1">
-            <Image
-              src="/images/factory01.jpg"
-              alt="Our Growth"
-              width={600}
-              height={400}
-              className="rounded-xl shadow-lg w-full h-auto object-cover"
-            />
+            {/* Image Section */}
+            <div className="md:w-1/2">
+              <Image
+                src={story.image_url}
+                alt={story.title}
+                width={600}
+                height={400}
+                className="rounded-xl shadow-lg w-full h-auto object-cover"
+              />
+            </div>
           </div>
-          <div className="order-1 md:order-2">
-            <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
-              Our company, RR Foods Lanka (PVT) Ltd, is a well-known brand in
-              the Sri Lankan market. We offer a wide range of locally sourced,
-              high-quality milk powder blends. The journey from a single coffee
-              machine to a leading producer and distributor reflects the
-              company’s commitment to excellence, sustainability, and community
-              development — generating thousands of self-employment
-              opportunities.
-            </p>
-            <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
-              Innovation and quality remain priorities as RR Foods Lanka (PVT)
-              Ltd continues to expand. By focusing on local sourcing, the
-              company guarantees that each product captures Sri Lanka’s rich
-              agricultural heritage. The company is committed to sustainable
-              practices and making a positive impact on both its customers and
-              the environment.
-            </p>
-          </div>
-        </div>
-
-        {/* Block 3 */}
-
-        {/* Block 4 - RR Foods Lanka */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mb-16">
-          <div className="order-1 md:order-1">
-            <h3 className="text-2xl font-bold mb-3 text-black dark:text-white">
-              RR Foods Lanka
-            </h3>
-            <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
-              RR Foods Lanka creates excellence in the manufacturing and
-              distribution of high-end blends based on milk powder, delivering
-              premium products that add taste and nutrition to everyday living.
-            </p>
-          </div>
-          <div className="order-2 md:order-2">
-            <Image
-              src="/images/RRfood.jpg"
-              alt="RR Foods Image"
-              width={600}
-              height={400}
-              className="rounded-xl shadow-lg w-full h-auto object-cover"
-            />
-          </div>
-        </div>
-
-        {/* Block 5 - RR Exports and Imports */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center mt-16">
-          {/* Image - Show first in desktop, second in mobile */}
-          <div className="order-2 md:order-1">
-            <Image
-              src="/images/RR-export.jpg"
-              alt="RR Exports Image"
-              width={600}
-              height={400}
-              className="rounded-xl shadow-lg w-full h-auto object-cover"
-            />
-          </div>
-
-          {/* Text - Show second in desktop, first in mobile */}
-          <div className="order-1 md:order-2">
-            <h3 className="text-2xl font-bold mb-3 text-black dark:text-white">
-              RR Exports and Imports
-            </h3>
-            <p className="text-gray-700 dark:text-gray-200 leading-relaxed">
-              RR Exports and Imports is dedicated to the international export of
-              premium Sri Lankan products presenting the best of our regional
-              craftsmanship and showcasing Sri Lankan quality to the world.
-            </p>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );
-};
-
-export default OurStory;
+}

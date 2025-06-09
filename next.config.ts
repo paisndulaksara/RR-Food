@@ -1,7 +1,15 @@
-import type { NextConfig } from "next";
-
-const nextConfig: NextConfig = {
-  /* config options here */
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "apirrfood.3dhdesign.info",
+        pathname: "/**", // ✅ Add this to allow all image paths
+      },
+    ],
+  },
 };
 
-export default nextConfig;
+module.exports = nextConfig;

@@ -1,46 +1,28 @@
-"use client";
-import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Autoplay, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/pagination";
+ 'use client';
 
-const slides = [
-  {
-    id: 1,
-    image: "/images/01.jpg",
-    mobileImage: "/images/01mobile.jpg",
-    title: "Brewed Fresh,<br/>Served Fast",
-    subtitle: "RR CAFE",
-    description:
-      "Coffee on-demand, whenever you need it.<br/> Perfectly brewed, every time.",
-  },
-  {
-    id: 2,
-    image: "/images/02.jpg",
-    mobileImage: "/images/02mobile.jpg",
-    title: "Pressed for Freshness,<br/> Served in Seconds",
-    subtitle: "RR Cafe",
-    description:
-      "Fresh juice at the touch of a button.<br/> Feel the goodness in every sip!",
-  },
-  {
-    id: 3,
-    image: "/images/03.jpg",
-    mobileImage: "/images/03mobile.jpg",
-    title: "From Beans to Bliss",
-    subtitle: "Authentic Flavor",
-    description: "Indulge in the Richness of RR",
-  },
-];
+import Image from 'next/image';
+import { useEffect, useState } from 'react';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay, Pagination } from 'swiper/modules';
+import { getHomeData, HomeHero } from '@/api/home';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const HeroSlider = () => {
+  const [slides, setSlides] = useState<HomeHero[]>([]);
+
+  useEffect(() => {
+    getHomeData()
+      .then((data) => setSlides(data.home_hero))
+      .catch((err) => console.error('Slider Error:', err));
+  }, []);
+
   return (
     <section className="relative w-full h-[100vh]">
       <Swiper
         modules={[Autoplay, Pagination]}
         autoplay={{ delay: 5000, disableOnInteraction: false }}
-        loop={true}
+        loop
         pagination={{ clickable: true }}
         className="h-full w-full"
       >
@@ -48,10 +30,9 @@ const HeroSlider = () => {
           <SwiperSlide key={slide.id}>
             <div className="relative w-full h-full">
               {/* Desktop Image */}
-              {/* Desktop Image */}
               <div className="hidden sm:block absolute inset-0">
                 <Image
-                  src={slide.image}
+                  src={slide.image_desktop_url}
                   alt={slide.title}
                   fill
                   priority
@@ -62,7 +43,7 @@ const HeroSlider = () => {
               {/* Mobile Image */}
               <div className="block sm:hidden absolute inset-0">
                 <Image
-                  src={slide.mobileImage}
+                  src={slide.image_mobile_url}
                   alt={slide.title}
                   fill
                   priority
@@ -72,7 +53,7 @@ const HeroSlider = () => {
 
               {/* Overlay Text */}
               <div className="absolute bottom-18 left-0 w-full h-full flex items-center z-10">
-              <div className="container max-w-[700px] px-4 text-center sm:text-left mx-auto">
+                <div className="container max-w-[700px] px-4 text-center sm:text-left mx-auto">
                   <h4 className="text-white text-[20px] sm:text-[24px] font-bold leading-tight">
                     {slide.subtitle}
                   </h4>
@@ -80,9 +61,7 @@ const HeroSlider = () => {
                     <div dangerouslySetInnerHTML={{ __html: slide.title }} />
                   </h1>
                   <p className="text-white text-[18px] sm:text-[24px] font-normal">
-                    <div
-                      dangerouslySetInnerHTML={{ __html: slide.description }}
-                    />
+                    <div dangerouslySetInnerHTML={{ __html: slide.description }} />
                   </p>
                 </div>
               </div>

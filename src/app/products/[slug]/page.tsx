@@ -1,37 +1,34 @@
-import { getAllProducts, getProductBySlug } from "@/lib/products";
+import { getProductBySlug, getAllProducts } from "@/api/products";
 import ProductDetail from "./ProductDetail";
-
-export const dynamicParams = false;
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
   const products = await getAllProducts();
-  return products.map((product) => ({ slug: product.slug }));
+
+  const allProducts = [
+    ...products.premixes.products,
+    ...products.machines.coffee_machines.products,
+    ...products.machines.juice_machines.products,
+  ];
+
+  return allProducts.map((product) => ({
+    slug: product.slug,
+  }));
 }
 
-// Define proper types for the params Promise
-type Params = Promise<{ slug: string }>;
+// ✅ Final version - suppresses warning using await trick
+export default async function ProductPage(props: {
+  params: { slug: string };
+}) {
+  const { slug } = await Promise.resolve(props.params); // ✅ suppresses warning
 
-// Define Props interface with correct Promise typing
-interface Props {
-  params: Params;
-}
+  console.log("➡️ Slug param:", slug);
 
-export default async function ProductPage({ params }: Props) {
-  // Await the params Promise directly
-  const { slug } = await params;
-  
-  const product = await getProductBySlug(slug);
-  
-  if (!product) {
-    return (
-      <main className="p-8 text-center dark:bg-black">
-        <h1 className="text-3xl font-bold mb-4">Coming Soon</h1>
-        <p className="text-lg">
-          Details for “{slug.replace(/-/g, " ")}” will be available shortly.
-        </p>
-      </main>
-    );
+  const data = await getProductBySlug(slug);
+
+  if (!data || !data.product) {
+    notFound(); // ✅ shows 404 if not found
   }
-  
-  return <ProductDetail product={product} />;
+
+  return <ProductDetail product={data.product} />;
 }

@@ -1,30 +1,64 @@
 "use client";
 import { useState } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Thumbs } from "swiper/modules";
 import { Swiper as SwiperClass } from "swiper";
-import { Product } from "@/lib/products";
+import { Product, Nutrition, Specification } from "@/api/products";
 import { useCart } from "@/context/CartContext";
 
 interface ProductDetailProps {
   product: Product;
 }
 
+// ✅ Type Guards
+function isNutritionArray(data: unknown): data is Nutrition[] {
+  return (
+    Array.isArray(data) &&
+    data.every((item) => "info" in item && "unit" in item && "per100g" in item)
+  );
+}
+
+function isSpecificationArray(data: unknown): data is Specification[] {
+  return (
+    Array.isArray(data) &&
+    data.every((item) => "spec" in item && "value" in item)
+  );
+}
+
 export default function ProductDetail({ product }: ProductDetailProps) {
   const {
     id,
     name: productName,
-    price: productPrice,
-    oldPrice: productOldPrice,
+    price,
+    discount_price,
     ingredients,
-    cups,
-    weight,
-    nutrition,
-    images: productImages,
+    serves: cups,
+    net_weight: weight,
     description,
-    descImage,
+    product_description_image_url,
+    images,
+    type,
+    type_relation,
+    certificate_image_url,
+    video_link: videoUrl,
+    similar_products,
   } = product;
+
+  const productImages = images?.map((img) => img.image_url) || [];
+
+  const productPrice = parseFloat(price || "0");
+  const productOldPrice = discount_price ? parseFloat(discount_price) : null;
+
+  const nutrition =
+    type === "nutrition" && isNutritionArray(type_relation)
+      ? type_relation
+      : null;
+  const specs =
+    type === "specs" && isSpecificationArray(type_relation)
+      ? type_relation
+      : null;
 
   const [thumbsSwiper, setThumbsSwiper] = useState<SwiperClass | null>(null);
   const [quantity, setQuantity] = useState(1);
@@ -44,19 +78,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
   };
 
   const handleBuyNow = () => {
-    const message = `Hi, I'm interested in buying ${quantity} of \"${productName}\".`;
+    const message = `Hi, I'm interested in buying ${quantity} of "${productName}".`;
     const whatsappURL = `https://wa.me/+94770562303?text=${encodeURIComponent(
       message
     )}`;
     window.open(whatsappURL, "_blank");
   };
-
-  const relatedProducts = [
-    { name: "RR Cafe", image: "/images/prod.png" },
-    { name: "RR Tea", image: "/images/prod.png" },
-    { name: "Ginger Milk Tea", image: "/images/prod.png" },
-    { name: "Hot Chocolate", image: "/images/prod.png" },
-  ];
 
   return (
     <main className="bg-white dark:bg-black text-black dark:text-white">
@@ -87,14 +114,12 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 />
               </SwiperSlide>
             ))}
-
-            {/* ✅ Conditionally render video if available */}
-            {product.videoUrl && (
+            {videoUrl && (
               <SwiperSlide>
                 <div className="relative w-full h-64 md:h-96 rounded overflow-hidden">
                   <iframe
                     className="w-full h-full"
-                    src={product.videoUrl}
+                    src={videoUrl}
                     title="Product Video"
                     frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
@@ -146,9 +171,9 @@ export default function ProductDetail({ product }: ProductDetailProps) {
           </div>
 
           <div className="text-sm text-gray-600 dark:text-white space-y-2">
-            {ingredients && ingredients.length > 0 && (
+            {ingredients && (
               <p>
-                <strong>Ingredients:</strong> {ingredients.join(", ")}.
+                <strong>Ingredients:</strong> {ingredients}
               </p>
             )}
             {cups && (
@@ -161,16 +186,17 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 <strong>Net Weight:</strong> {weight}
               </p>
             )}
-
-            <div className="mt-4">
-              <Image
-                src="/images/certificate.jpg"
-                alt="Certified Product"
-                width={300}
-                height={100}
-                className="object-contain rounded shadow-md"
-              />
-            </div>
+            {certificate_image_url && (
+              <div className="mt-4">
+                <Image
+                  src={certificate_image_url}
+                  alt="Certified Product"
+                  width={300}
+                  height={100}
+                  className="object-contain rounded shadow-md"
+                />
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-4">
@@ -204,7 +230,6 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         </div>
       </section>
 
-      {/* Description Section */}
       <section className="container mx-auto px-4 py-8">
         <h2 className="text-xl md:text-2xl font-bold mb-6">Description</h2>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8 items-start">
@@ -212,26 +237,24 @@ export default function ProductDetail({ product }: ProductDetailProps) {
             <table className="w-full table-auto border border-gray-200 dark:border-gray-700">
               <thead className="bg-gray-100 dark:bg-gray-800">
                 <tr>
-                  <th className="border px-3 py-2 text-left">
-                    Nutritional Information
-                  </th>
+                  <th className="border px-3 py-2 text-left">Info</th>
                   <th className="border px-3 py-2 text-left">Unit</th>
                   <th className="border px-3 py-2 text-left">Per 100g</th>
                 </tr>
               </thead>
               <tbody>
-                {nutrition.map((row) => (
-                  <tr key={row.label}>
-                    <td className="border px-3 py-2">{row.label}</td>
-                    <td className="border px-3 py-2">{row.unit}</td>
-                    <td className="border px-3 py-2">{row.per100g}</td>
+                {nutrition.map((item) => (
+                  <tr key={item.id}>
+                    <td className="border px-3 py-2">{item.info}</td>
+                    <td className="border px-3 py-2">{item.unit}</td>
+                    <td className="border px-3 py-2">{item.per100g}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
 
-          {product.specs && (
+          {specs && (
             <table className="w-full table-auto border border-gray-200 dark:border-gray-700">
               <thead className="bg-gray-100 dark:bg-gray-800">
                 <tr>
@@ -240,25 +263,27 @@ export default function ProductDetail({ product }: ProductDetailProps) {
                 </tr>
               </thead>
               <tbody>
-                {product.specs.map((row) => (
-                  <tr key={row.key}>
-                    <td className="border px-3 py-2">{row.key}</td>
-                    <td className="border px-3 py-2">{row.value}</td>
+                {specs.map((item) => (
+                  <tr key={item.id}>
+                    <td className="border px-3 py-2">{item.spec}</td>
+                    <td className="border px-3 py-2">{item.value}</td>
                   </tr>
                 ))}
               </tbody>
             </table>
           )}
+      {product_description_image_url && (
+  <div className="overflow-hidden rounded shadow-sm mt-6">
+    <Image
+      src={product_description_image_url}
+      alt={`Rs.${productName} detail`}
+      width={600}
+      height={400}
+      className="object-cover w-full h-full"
+    />
+  </div>
+)}
 
-          <div className="overflow-hidden rounded shadow-sm">
-            <Image
-              src={descImage}
-              alt={`Rs.{productName} detail`}
-              width={600}
-              height={400}
-              className="object-cover w-full h-full"
-            />
-          </div>
         </div>
 
         <p className="text-gray-600 dark:text-white leading-relaxed">
@@ -270,25 +295,33 @@ export default function ProductDetail({ product }: ProductDetailProps) {
         <h2 className="text-xl md:text-2xl font-bold mb-6">
           You Might Also Like
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
-          {relatedProducts.map((item, idx) => (
-            <div
-              key={idx}
-              className="bg-white dark:bg-gray-900 rounded p-4 text-center shadow hover:shadow-lg transition"
-            >
-              <Image
-                src={item.image}
-                alt={item.name}
-                width={120}
-                height={120}
-                className="mx-auto mb-2 object-contain"
-              />
-              <h4 className="font-semibold text-sm text-black dark:text-white">
-                {item.name}
-              </h4>
-            </div>
-          ))}
-        </div>
+        {similar_products && similar_products.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+            {similar_products.map((item) => (
+              <Link href={`/products/${item.slug}`} key={item.id}>
+                <div className="cursor-pointer bg-white dark:bg-gray-900 rounded p-4 text-center shadow hover:shadow-lg transition">
+                  <Image
+                    src={item.product_image_url}
+                    alt={item.name}
+                    width={120}
+                    height={120}
+                    className="mx-auto mb-2 object-contain"
+                  />
+                  <h4 className="font-semibold text-sm text-black dark:text-white">
+                    {item.name}
+                  </h4>
+                  <p className="text-xs text-gray-500 dark:text-gray-300">
+                    Rs. {parseFloat(item.price).toFixed(2)}
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <p className="text-gray-500 dark:text-gray-300">
+            No similar products found.
+          </p>
+        )}
       </section>
     </main>
   );
