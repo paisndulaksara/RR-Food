@@ -1,9 +1,10 @@
-'use client';
-
-import { useEffect, useState } from 'react';
 import { getContactInfo } from '@/api/contact';
 import { FaMapMarkerAlt, FaPhone, FaRegClock, FaEnvelope } from 'react-icons/fa';
 
+// NOTE: We have removed 'use client', useState, and useEffect.
+// This is now a Server Component.
+
+// Define the type for your data
 type ContactData = {
   title: string;
   description: string;
@@ -15,25 +16,29 @@ type ContactData = {
   map: string;
 };
 
-export default function ContactDetails() {
-  const [contact, setContact] = useState<ContactData | null>(null);
+// The component is now 'async' to allow 'await' for data fetching
+export default async function ContactDetails() {
+  // Fetch data directly on the server. The page will wait for this to finish.
+  const contact: ContactData | null = await getContactInfo().catch(() => null);
 
-  useEffect(() => {
-    getContactInfo().then(setContact);
-  }, []);
+  // If data fails to load, show a simple message.
+  if (!contact) {
+    return (
+      <section className="text-center py-20">
+        <p>Error: Could not load contact information.</p>
+      </section>
+    );
+  }
 
-  if (!contact) return <p className="text-center py-10">Loading contact info...</p>;
-
+  // If data loads successfully, return the JSX with the data.
   return (
     <section className="pb-16 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
-          
           {/* LEFT COLUMN: Contact Info */}
           <div>
             <h2 className="text-2xl md:text-3xl font-bold mb-4">{contact.title}</h2>
             <p className="text-gray-600 dark:text-white mb-8">{contact.description}</p>
-
             <div className="space-y-6">
               <div className="flex items-start gap-4">
                 <FaMapMarkerAlt className="text-xl text-gray-700 dark:text-white mt-1" />
@@ -42,7 +47,6 @@ export default function ContactDetails() {
                   <p className="text-sm text-gray-600 dark:text-white">{contact.address}</p>
                 </div>
               </div>
-
               <div className="flex items-start gap-4">
                 <FaPhone className="text-xl text-gray-700 dark:text-white mt-1" />
                 <div>
@@ -50,7 +54,6 @@ export default function ContactDetails() {
                   <p className="text-sm text-gray-600 dark:text-white">{contact.phone}</p>
                 </div>
               </div>
-
               <div className="flex items-start gap-4">
                 <FaRegClock className="text-xl text-gray-700 dark:text-white mt-1" />
                 <div>
@@ -61,7 +64,6 @@ export default function ContactDetails() {
                   </p>
                 </div>
               </div>
-
               <div className="flex items-start gap-4">
                 <FaEnvelope className="text-xl text-gray-700 dark:text-white mt-1" />
                 <div>
@@ -71,7 +73,6 @@ export default function ContactDetails() {
               </div>
             </div>
           </div>
-
           {/* RIGHT COLUMN: Map */}
           <div className="w-full h-[400px] overflow-hidden rounded shadow-sm">
             <iframe

@@ -1,70 +1,34 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
-
-// Data
-const coffeeMachines = [
-  {
-    name: "2 Canisters Vending Machine",
-    image: "/images/two-canister.png",
-    slug: "2-canister-vending",
-  },
-  {
-    name: "3 Canisters Vending Machine",
-    image: "/images/three-canister.png",
-    slug: "3-canister-vending",
-  },
-  {
-    name: "4 Canisters Vending Machine",
-    image: "/images/four-cansiter.png",
-    slug: "4-canister-vending",
-  },
-  {
-    name: "RR Special Machine",
-    image: "/images/Special-Machine.png",
-    slug: "rr-special-machine",
-  },
-  {
-    name: "RR Athlantic Machine",
-    image: "/images/Athlantic.png",
-    slug: "rr-athlantic-machine",
-  },
-];
-
-const juiceMachines = [
-  {
-    name: "2 Canisters Vending Machine",
-    image: "/images/fruit-two-canisters.png",
-    slug: "2-canister-juice",
-  },
-  {
-    name: "3 Canisters Vending Machine",
-    image: "/images/fruit-three-canister.png",
-    slug: "3-canister-juice",
-  },
-  {
-    name: "2 Canisters Juice Machine",
-    image: "/images/machin-01.png",
-    slug: "2-canister-juice-nice",
-  },
-  {
-    name: "1 Canisters Juice Machine",
-    image: "/images/machin-02.png",
-    slug: "1-canister-juice",
-  },
-  {
-    name: "Juice Machine Dispencer",
-    image: "/images/Juice-Machine-Dispenser.png",
-    slug: "juice-machine-dispnecer",
-  },
-];
-
-const allMachines = [...coffeeMachines, ...juiceMachines];
+import { getAllProducts, Product } from "@/api/products"; // Assuming API types are in this file
+import Spinner from "@/components/ui/Spinner"; // Your Spinner component
 
 export default function VendingMachine() {
   const [activeTab, setActiveTab] = useState<"all" | "coffee" | "juice">("all");
 
+  // State to hold data from the API
+  const [coffeeMachines, setCoffeeMachines] = useState<Product[]>([]);
+  const [juiceMachines, setJuiceMachines] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Fetch all product data when the component loads
+    getAllProducts()
+      .then((data) => {
+        // Set the state with data from the API
+        setCoffeeMachines(data.machines.coffee_machines.products || []);
+        setJuiceMachines(data.machines.juice_machines.products || []);
+      })
+      .catch((err) => console.error("Failed to fetch machines:", err))
+      .finally(() => setLoading(false)); // Stop loading state
+  }, []);
+
+  // Combine the machine arrays after they've been fetched
+  const allMachines = [...coffeeMachines, ...juiceMachines];
+
+  // This logic remains the same, but now uses the state variables
   const machinesToShow =
     activeTab === "all"
       ? allMachines
@@ -104,42 +68,48 @@ export default function VendingMachine() {
           </div>
         </div>
 
-        {/* Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-          {machinesToShow.map(({ name, image, slug }, index) => (
-            <Link
-              key={index}
-              href={`/products/${slug}`}
-              className="flex flex-col items-center group cursor-pointer"
-            >
-              <div className="relative w-full rounded-lg shadow-lg overflow-hidden group-hover:shadow-2xl transition">
-                <div className="absolute inset-0 z-0">
-                  <div className="h-[75%] group-hover:h-full bg-black transition-all duration-500 ease-in-out" />
-                  <div className="h-[25%] dark:bg-[#424242] bg-[#ececec]" />
+        {/* Conditional Grid */}
+        {loading ? (
+          <div className="flex justify-center items-center" style={{ minHeight: '40vh' }}>
+            <Spinner text="Loading Machines..." />
+          </div>
+        ) : (
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {machinesToShow.map((item) => (
+              <Link
+                key={item.id} // Use stable ID from API
+                href={`/products/${item.slug}`}
+                className="flex flex-col items-center group cursor-pointer"
+              >
+                <div className="relative w-full rounded-lg shadow-lg overflow-hidden group-hover:shadow-2xl transition">
+                  <div className="absolute inset-0 z-0">
+                    <div className="h-[75%] group-hover:h-full bg-black transition-all duration-500 ease-in-out" />
+                    <div className="h-[25%] dark:bg-[#424242] bg-[#ececec]" />
+                  </div>
+
+                  <div className="relative z-10 flex justify-center items-center p-4 h-[220px]">
+                    <Image
+                      src={item.feature_image_url || '/images/fallback.jpg'} // Use image from API
+                      alt={item.name}
+                      width={180}
+                      height={180}
+                      className="object-contain"
+                    />
+                  </div>
                 </div>
 
-                <div className="relative z-10 flex justify-center items-center p-4">
-                  <Image
-                    src={image}
-                    alt={name}
-                    width={180}
-                    height={180}
-                    className="object-contain"
-                  />
+                <div className="mt-4 text-center">
+                  <h4 className="text-lg font-semibold text-white dark:text-white group-hover:text-[#caa465] transition-colors duration-300">
+                    {item.name}
+                  </h4>
+                  <div className="text-sm text-[#e12c43] mt-1 underline group-hover:opacity-90">
+                    REQUEST
+                  </div>
                 </div>
-              </div>
-
-              <div className="mt-4 text-center">
-                <h4 className="text-lg font-semibold text-white dark:text-white group-hover:text-[#caa465] transition-colors duration-300">
-                  {name}
-                </h4>
-                <div className="text-sm text-[#e12c43] mt-1 underline group-hover:opacity-90">
-                  REQUEST
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+              </Link>
+            ))}
+          </div>
+        )}
       </div>
     </section>
   );

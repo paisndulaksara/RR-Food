@@ -1,8 +1,10 @@
 'use client';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { getTeamData } from '@/api/team'; // ✅ create this API file as explained below
+import { getTeamData } from '@/api/team';
+import Spinner from '@/components/ui/Spinner'; // 1. IMPORT THE SPINNER
 
+// Your type definitions are unchanged
 interface TeamMember {
   id: number;
   name: string;
@@ -11,7 +13,6 @@ interface TeamMember {
   description?: string;
   type: 'higher' | 'manager';
 }
-
 interface HeaderData {
   title: string;
   description: string;
@@ -19,20 +20,42 @@ interface HeaderData {
 }
 
 export default function OurTeam() {
+  // Your state is unchanged
   const [header, setHeader] = useState<HeaderData | null>(null);
   const [higherTeam, setHigherTeam] = useState<TeamMember[]>([]);
   const [managers, setManagers] = useState<TeamMember[]>([]);
   const [modalMember, setModalMember] = useState<TeamMember | null>(null);
 
+  // 2. ADD ONLY THE isLoading STATE
+  const [isLoading, setIsLoading] = useState(true);
+
+  // Your useEffect is unchanged, we just add `.finally()`
   useEffect(() => {
-    getTeamData().then((data) => {
-      setHeader(data.header);
-      const all = data.teams as TeamMember[];
-      setHigherTeam(all.filter((m) => m.type === 'higher'));
-      setManagers(all.filter((m) => m.type === 'manager'));
-    });
+    getTeamData()
+      .then((data) => {
+        setHeader(data.header);
+        const all = data.teams as TeamMember[];
+        setHigherTeam(all.filter((m) => m.type === 'higher'));
+        setManagers(all.filter((m) => m.type === 'manager'));
+      })
+      .catch((err) => console.error("Error fetching team:", err))
+      .finally(() => {
+        // 3. SET LOADING TO FALSE WHEN DONE
+        setIsLoading(false);
+      });
   }, []);
 
+  // 4. ADD THE LOADING CHECK HERE
+  if (isLoading) {
+    return (
+      // This will show a spinner that takes up the space of the component
+      <div className="flex justify-center items-center" style={{ minHeight: '80vh' }}>
+        <Spinner text="Loading Our Team..." />
+      </div>
+    );
+  }
+
+  // YOUR EXISTING RETURN CODE IS UNCHANGED
   return (
     <section className="pb-16 bg-white dark:bg-black text-center relative">
       <div className="container mx-auto px-4">
@@ -50,11 +73,13 @@ export default function OurTeam() {
               <div
                 className={`mb-4 ${member.description ? 'cursor-pointer' : ''}`}
                 onClick={() => member.description && setModalMember(member)}
-                title={member.name.includes('Jayasinghe')
-                  ? 'CEO Message'
-                  : member.name.includes('Roshini')
-                  ? 'Managing Director Message'
-                  : ''}
+                title={
+                  member.name.includes('Jayasinghe')
+                    ? 'CEO Message'
+                    : member.name.includes('Roshini')
+                    ? 'Managing Director Message'
+                    : ''
+                }
               >
                 <Image
                   src={member.image_url}
@@ -95,7 +120,7 @@ export default function OurTeam() {
       {/* Modal for higher team messages */}
       {modalMember && (
         <div
-          className="fixed inset-0 backdrop-blur-sm bg-white/30 z-50 flex items-center justify-center px-4"
+          className="fixed inset-0 backdrop-blur-sm bg-black/60 z-50 flex items-center justify-center px-4"
           onClick={() => setModalMember(null)}
         >
           <div

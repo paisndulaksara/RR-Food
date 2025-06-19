@@ -1,24 +1,36 @@
-'use client';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
 import { getAboutData } from '@/api/about';
 
-// Define the story type
+// NOTE: We have removed 'use client', useState, and useEffect.
+// This is now a Server Component.
+
+// Define the story type (this can stay the same)
 interface Story {
   id: number;
   title: string;
   description: string;
-  image: string;
-  image_url: string;
+  image: string; // Assuming 'image' is the filename if needed
+  image_url: string; // The full URL for the image src
 }
 
-export default function OurStory() {
-  const [stories, setStories] = useState<Story[]>([]);
+// The component is now 'async' to allow 'await' for data fetching
+export default async function OurStory() {
+  // Fetch data directly on the server. The page will wait for this to finish.
+  const data = await getAboutData();
+  const stories: Story[] = data.our_story || []; // Get the 'our_story' array from the data
 
-  useEffect(() => {
-    getAboutData().then((data) => setStories(data.our_story || []));
-  }, []);
+  // A check in case the API returns no stories
+  if (!stories.length) {
+    return (
+      <section className="py-16 bg-white dark:bg-black">
+        <div className="container mx-auto px-4 text-center">
+            <p>Our story is currently being written...</p>
+        </div>
+      </section>
+    );
+  }
 
+  // If data loads successfully, return the JSX with the data.
   return (
     <section className="pb-16 bg-white dark:bg-black">
       <div className="container mx-auto px-4">
