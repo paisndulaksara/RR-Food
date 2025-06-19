@@ -48,7 +48,7 @@ export default async function OurStory() {
             {/* Text Section */}
             <div className="md:w-1/2">
               <h3 className="text-2xl font-semibold mb-2 text-black dark:text-white">
-                {story.title}
+                {/* {story.title} */}
               </h3>
               <p className="text-gray-700 dark:text-gray-200 leading-relaxed whitespace-pre-line">
                 {story.description}

@@ -168,7 +168,7 @@ const Header = () => {
         </div>
 
         {menuOpen && (
-          <div className={`lg:hidden absolute top-[120px] left-0 right-0 py-4 z-40 flex flex-col items-center gap-4 uppercase text-sm border-t border-[#c9a566]/60 ${backgroundClass}`}>
+          <div className={`lg:hidden absolute top-[120px] left-0 right-0 py-4 z-40 flex flex-col items-center gap-4 uppercase text-sm border-t border-[#c9a566]/60 bg-white dark:bg-black`}>
             <Link href="/" className={textColor}>HOME</Link>
             <Link href="/products" className={textColor}>PRODUCTS</Link>
             <button

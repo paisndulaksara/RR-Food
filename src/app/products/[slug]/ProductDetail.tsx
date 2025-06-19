@@ -301,7 +301,7 @@ export default function ProductDetail({ product }: ProductDetailProps) {
               <Link href={`/products/${item.slug}`} key={item.id}>
                 <div className="cursor-pointer bg-white dark:bg-gray-900 rounded p-4 text-center shadow hover:shadow-lg transition">
                   <Image
-                    src={item.product_image_url}
+                    src={item.feature_image_url}
                     alt={item.name}
                     width={120}
                     height={120}

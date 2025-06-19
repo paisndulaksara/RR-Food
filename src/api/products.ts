@@ -41,6 +41,7 @@ export interface SimilarProduct {
   name: string;
   slug: string;
   price: string;
+  feature_image_url: string;
   product_image_url: string;
 }
 
